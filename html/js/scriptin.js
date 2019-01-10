@@ -373,7 +373,7 @@ app.controller("Webui", ['$scope', 'socket', 'Servers', '$filter', '$translate',
     }
 
     var EXTRA_ACTIONS = {
-      'bungeecord': ['end'],
+      'bungeecord': ['end', 'restart'],
       'nukkit': ['stop', 'stop_and_backup', 'restart', 'save-all', 'save-on', 'save-off', 'reload'],
       'paperspigot': ['stop', 'stop_and_backup', 'restart', 'save-all', 'save-on', 'save-off'],
       'cuberite': ['stop', 'stop_and_backup', 'restart', 'save-all', 'reload'],
@@ -805,7 +805,7 @@ app.factory("Servers", ['socket', '$filter', function(socket, $filter) {
     me.notices = {};
     me.latest_notice = {};
     me.niceness = 0;
-    me.AUTO_RATE_THRESHOLD_PER_SECOND = 100;
+    me.AUTO_RATE_THRESHOLD_PER_SECOND = 180;
     me.AUTO_RATE_SUSTAINED_DURATION = 1; //how long (in seconds) must rate be sustained to trigger
     me.auto_rate_counter = 0;
     me.auto_rate_interval = setInterval(function() {
