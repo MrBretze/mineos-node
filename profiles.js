@@ -282,7 +282,7 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = 1.13.3;
+        item['version'] = '1.13.3';
         item['release_version'] = '';
         item['url'] = 'https://papermc.io/ci/job/Paper-1.13/lastSuccessfulBuild/artifact/paperclip.jar';
         p.push(JSON.parse(JSON.stringify(item)));
@@ -296,7 +296,7 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = 1.12.2;
+        item['version'] = '1.12.2';
         item['release_version'] = '';
         item['url'] = 'https://papermc.io/ci/job/Paper/lastSuccessfulBuild/artifact/paperclip.jar';
         p.push(JSON.parse(JSON.stringify(item)));
