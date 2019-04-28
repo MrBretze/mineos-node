@@ -805,7 +805,7 @@ app.factory("Servers", ['socket', '$filter', function(socket, $filter) {
     me.notices = {};
     me.latest_notice = {};
     me.niceness = 0;
-    me.AUTO_RATE_THRESHOLD_PER_SECOND = 180;
+    me.AUTO_RATE_THRESHOLD_PER_SECOND = 220;
     me.AUTO_RATE_SUSTAINED_DURATION = 1; //how long (in seconds) must rate be sustained to trigger
     me.auto_rate_counter = 0;
     me.auto_rate_interval = setInterval(function() {
