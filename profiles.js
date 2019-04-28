@@ -273,7 +273,7 @@ exports.profile_manifests = {
       try {
         var item = {};
 
-        item['id'] = 'paperspigot-latest';
+	item['id'] = 'paperspigot-1.13.2-latest';
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
         item['type'] = 'release';
@@ -282,12 +282,26 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = 0;
+        item['version'] = 1.12.3;
         item['release_version'] = '';
-        item['url'] = 'https://ci.destroystokyo.com/job/PaperSpigot/lastSuccessfulBuild/artifact/paperclip.jar';
+        item['url'] = 'https://papermc.io/ci/job/Paper-1.13/lastSuccessfulBuild/artifact/paperclip.jar';
+        p.push(JSON.parse(JSON.stringify(item)));
+	      
+        item['id'] = 'paperspigot-1.12.2-latest';
+        item['time'] = new Date().getTime();
+        item['releaseTime'] = new Date().getTime();
+        item['type'] = 'release';
+        item['group'] = 'paperspigot';
+        item['webui_desc'] = 'Latest paperclip release';
+        item['weight'] = 0;
+        item['filename'] = 'paperclip.jar';
+        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+        item['version'] = 1.12.2;
+        item['release_version'] = '';
+        item['url'] = 'https://papermc.io/ci/job/Paper/lastSuccessfulBuild/artifact/paperclip.jar';
         p.push(JSON.parse(JSON.stringify(item)));
 
-        item['version'] = '1072';
+        item['version'] = '1104';
         item['id'] = 'paperspigot-{0}'.format(item.version);
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
@@ -298,7 +312,7 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://ci.destroystokyo.com/job/PaperSpigot/{0}/artifact/paperclip.jar'.format(item.version);
+        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/paperclip.jar'.format(item.version);
         p.push(JSON.parse(JSON.stringify(item)));
 
         item['version'] = '916';
@@ -312,7 +326,7 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://ci.destroystokyo.com/job/PaperSpigot/{0}/artifact/paperclip.jar'.format(item.version);
+        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/paperclip.jar'.format(item.version);
         p.push(JSON.parse(JSON.stringify(item)));
 
         item['version'] = '773';
@@ -326,7 +340,7 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://ci.destroystokyo.com/job/PaperSpigot/{0}/artifact/paperclip.jar'.format(item.version);
+        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/paperclip.jar'.format(item.version);
         p.push(JSON.parse(JSON.stringify(item)));
 
         item['version'] = '443';
@@ -340,7 +354,7 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://ci.destroystokyo.com/job/PaperSpigot/{0}/artifact/Paperclip.jar'.format(item.version);
+        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/Paperclip.jar'.format(item.version);
         //uppercase Paperclip.jar for some reason (old convention, perhaps)
         p.push(JSON.parse(JSON.stringify(item)));
 
