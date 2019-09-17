@@ -273,6 +273,20 @@ exports.profile_manifests = {
       try {
         var item = {};
 
+	item['id'] = 'paperspigot-1.14.X-latest';
+        item['time'] = new Date().getTime();
+        item['releaseTime'] = new Date().getTime();
+        item['type'] = 'release';
+        item['group'] = 'paperspigot';
+        item['webui_desc'] = 'Latest paperclip release';
+        item['weight'] = 0;
+        item['filename'] = 'paperclip.jar';
+        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+        item['version'] = '1.13.3';
+        item['release_version'] = '';
+        item['url'] = 'https://papermc.io/ci/job/Paper-1.14/lastSuccessfulBuild/artifact/paperclip.jar';
+        p.push(JSON.parse(JSON.stringify(item)));
+	      
 	item['id'] = 'paperspigot-1.13.2-latest';
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
