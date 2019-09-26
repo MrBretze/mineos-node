@@ -447,9 +447,11 @@ exports.profile_manifests = {
                  profilesItem['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
                  profilesItem['weight'] = 0;
                  profilesItem['filename'] = index;
-                 profilesItem['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+                 profilesItem['downloaded'] = fs.existsSync(path.join(profile_dir, profilesItem.id, profilesItem.filename));
                  profilesItem['version'] = ref_obj['mc_version'];
                  profilesItem['url'] = ref_obj['direct_link'];
+
+                 p.push(profilesItem);
                }});
 	       }
 
