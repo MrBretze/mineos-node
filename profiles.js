@@ -262,34 +262,32 @@ exports.profile_manifests = {
     },
     handler: function(profile_dir, body, callback) {
       var p = [];
-
+      
       try {
         for (var index in body) {
-          var request = require('request');
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
           var item = new profile_template();
           var filename = body[index];
 
-          request(url, function(error, response, bodyTwo) {
-            if (!error && response.statusCode == 200) {
-              var ref_obj = JSON.parse(bodyTwo);
+          const https = require('https');
 
-              item['id'] = index;
-              item['time'] = new Date(ref_obj['date_epoch']).getTime();
-              item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-              item['type'] = 'release';
-              item['group'] = 'spigot';
-              item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-              item['weight'] = 5;
-              item['filename'] = filename;
-              item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-              item['version'] = ref_obj['mc_version'];
-              item['release_version'] = '';
-              item['url'] = ref_obj['direct_link'];
+          let req = https.get(url, function(res) {
+          	let data = '',
+          		json_data;
 
-              p.push(item);
-            }
-            callback(error, p);
+          	res.on('data', function(stream) {
+          		data += stream;
+          	});
+          	res.on('end', function() {
+          		json_data = JSON.parse(data);
+
+          		// will output a Javascript object
+          		console.log(json_data);
+          	});
+          });
+
+          req.on('error', function(e) {
+              console.log(e.message);
           });
         }
 
