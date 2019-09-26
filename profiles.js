@@ -273,11 +273,11 @@ exports.profile_manifests = {
       try {
         var item = {};
 
-	item['id'] = 'craftbukkit-1.14.X-latest';
+	      item['id'] = 'craftbukkit-1.14.4-latest';
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
         item['type'] = 'release';
-        item['group'] = 'craftbukkit-1.14.4';
+        item['group'] = 'Craft-Bukkit';
         item['webui_desc'] = 'Latest Craftbukkit release';
         item['weight'] = 0;
         item['filename'] = 'craftbukkit.jar';
@@ -286,12 +286,12 @@ exports.profile_manifests = {
         item['release_version'] = '';
         item['url'] = 'https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar';
         p.push(JSON.parse(JSON.stringify(item)));
-	      
-	item['id'] = 'craftbukkit-1.13.2-latest';
+
+	      item['id'] = 'craftbukkit-1.13.2-latest';
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
         item['type'] = 'release';
-        item['group'] = 'craftbukkit-1.13.2';
+        item['group'] = 'Craft-Bukkit';
         item['webui_desc'] = 'Latest Craftbukkit release';
         item['weight'] = 0;
         item['filename'] = 'craftbukkit.jar';
@@ -327,7 +327,7 @@ exports.profile_manifests = {
         item['release_version'] = '';
         item['url'] = 'https://papermc.io/ci/job/Paper-1.14/lastSuccessfulBuild/artifact/paperclip.jar';
         p.push(JSON.parse(JSON.stringify(item)));
-	      
+
 	item['id'] = 'paperspigot-1.13.2-latest';
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
@@ -337,11 +337,11 @@ exports.profile_manifests = {
         item['weight'] = 0;
         item['filename'] = 'paperclip.jar';
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = '1.13.3';
+        item['version'] = '1.13.2';
         item['release_version'] = '';
         item['url'] = 'https://papermc.io/ci/job/Paper-1.13/lastSuccessfulBuild/artifact/paperclip.jar';
         p.push(JSON.parse(JSON.stringify(item)));
-	      
+
         item['id'] = 'paperspigot-1.12.2-latest';
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
@@ -420,16 +420,43 @@ exports.profile_manifests = {
   },
   spigot: {
     name: 'Spigot',
-    handler: function(profile_dir, callback) {
+    request_args: {
+      url: 'https://mcmirror.io/api/list/spigot',
+      json: true
+    },
+    handler: function(profile_dir, body, callback) {
       var p = [];
 
       try {
         var item = {};
 
+	       for (var index in body.promos) {
+	           var profilesItem = new profile_template();
+             var request = require('request');
+
+             request('', function(error, response, body){
+               if(!error && response.statusCode = 200)
+               {
+                 var ref_obj = JSON.parse(body);
+
+                 profilesItem['id'] = index;
+                 profilesItem['time'] = new Date(ref_obj['date_epoch']).getTime();
+                 profilesItem['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+                 profilesItem['type'] = 'release';
+                 profilesItem['group'] = 'spigot';
+                 profilesItem['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+                 profilesItem['weight'] = 0;
+                 profilesItem['filename'] = index;
+                 profilesItem['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+                 profilesItem['version'] = ref_obj['mc_version'];
+                 profilesItem['url'] = ref_obj['direct_link'];
+               }});
+	       }
+
         item['id'] = 'BuildTools-latest';
         item['time'] = new Date().getTime();
         item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
+        item['type'] = 'snapshot';
         item['group'] = 'spigot';
         item['webui_desc'] = 'Latest BuildTools.jar for building Spigot/Craftbukkit';
         item['weight'] = 0;
