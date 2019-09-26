@@ -262,23 +262,22 @@ exports.profile_manifests = {
              var request = require('request');
              var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
              var item = new profile_template();
+             var filename = body[index];
 
              request(url, function(error, response, body){
                if(!error && response.statusCode == 200)
                {
-                 var ref_obj = JSON.parse(body);
-
                  item['id'] = index;
-                 item['time'] = new Date(ref_obj['date_epoch']).getTime();
-                 item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+                 item['time'] = new Date(body['date_epoch']).getTime();
+                 item['releaseTime'] = new Date(body['date_epoch']).getTime();
                  item['type'] = 'release';
                  item['group'] = 'spigot';
-                 item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+                 item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(body['mc_version']);
                  item['weight'] = 0;
-                 item['filename'] = body[index];
+                 item['filename'] = filename;
                  item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-                 item['version'] = ref_obj['mc_version'];
-                 item['url'] = ref_obj['direct_link'];
+                 item['version'] = body['mc_version'];
+                 item['url'] = body['direct_link'];
 
                  p.push(item);
                }});
