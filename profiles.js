@@ -270,7 +270,7 @@ exports.profile_manifests = {
           var item = new profile_template();
           var filename = body[index];
 
-          request(url, function(error, response, bodyTwo) {
+          request(url, p.push(function(error, response, bodyTwo, callback) {
             if (!error && response.statusCode == 200) {
               var ref_obj = JSON.parse(bodyTwo);
 
@@ -287,13 +287,10 @@ exports.profile_manifests = {
               item['release_version'] = '';
               item['url'] = ref_obj['direct_link'];
 
-              p.push(item);
+              callback(null, item);
             }
-            callback(null, p);
           });
-          callback(null, p);
         }
-        callback(null, p);
       } catch (e) {}
       callback(null, p);
     } //end handler
