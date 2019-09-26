@@ -270,31 +270,27 @@ exports.profile_manifests = {
           var item = new profile_template();
           var filename = body[index];
 
-          request({
-              url,
-              json: true
-            },
-            function(error, response, bodyTwo) {
-              if (!error && response.statusCode == 200) {
-                var ref_obj = JSON.parse(bodyTwo);
+          request(url, function(error, response, bodyTwo) {
+            if (!error && response.statusCode == 200) {
+              var ref_obj = JSON.parse(bodyTwo);
 
-                item['id'] = index;
-                item['time'] = new Date(ref_obj['date_epoch']).getTime();
-                item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-                item['type'] = 'release';
-                item['group'] = 'spigot';
-                item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-                item['weight'] = 5;
-                item['filename'] = filename;
-                item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-                item['version'] = ref_obj['mc_version'];
-                item['release_version'] = '';
-                item['url'] = ref_obj['direct_link'];
+              item['id'] = index;
+              item['time'] = new Date(ref_obj['date_epoch']).getTime();
+              item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+              item['type'] = 'release';
+              item['group'] = 'spigot';
+              item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+              item['weight'] = 5;
+              item['filename'] = filename;
+              item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+              item['version'] = ref_obj['mc_version'];
+              item['release_version'] = '';
+              item['url'] = ref_obj['direct_link'];
 
-                p.push(item);
-              }
-              callback(null, p)
-            });
+              p.push(item);
+            }
+            callback(error, p);
+          });
         }
 
       } catch (e) {}
