@@ -289,7 +289,7 @@ exports.profile_manifests = {
             item['release_version'] = '';
             item['url'] = ref_obj['direct_link'];
 
-            callback(null, JSON.parse(JSON.stringify(item)));
+            return item;
           });
         }
       } catch (e) {}
