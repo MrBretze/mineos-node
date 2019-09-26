@@ -428,46 +428,29 @@ exports.profile_manifests = {
       var p = [];
 
       try {
-        var item = {};
-
-        item['id'] = 'BuildTools-latest';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'snapshot';
-        item['group'] = 'spigot';
-        item['webui_desc'] = 'Latest BuildTools.jar for building Spigot/Craftbukkit';
-        item['weight'] = 0;
-        item['filename'] = 'BuildTools.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = 0;
-        item['release_version'] = '';
-        item['url'] = 'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar';
-
-        p.push(JSON.parse(JSON.stringify(item)));
-
          for (var index in body) {
              var request = require('request');
              var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
-
+             var item = new profile_template();
 
              request(url, function(error, response, body){
                if(!error && response.statusCode == 200)
                {
                  var ref_obj = JSON.parse(body);
 
-                 profilesItem['id'] = 0;
-                 profilesItem['time'] = new Date(ref_obj['date_epoch']).getTime();
-                 profilesItem['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-                 profilesItem['type'] = 'release';
-                 profilesItem['group'] = 'spigot';
-                 profilesItem['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-                 profilesItem['weight'] = 0;
-                 profilesItem['filename'] = body[index];
-                 profilesItem['downloaded'] = fs.existsSync(path.join(profile_dir, profilesItem.id, profilesItem.filename));
-                 profilesItem['version'] = ref_obj['mc_version'];
-                 profilesItem['url'] = ref_obj['direct_link'];
+                 item['id'] = index;
+                 item['time'] = new Date(ref_obj['date_epoch']).getTime();
+                 item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+                 item['type'] = 'release';
+                 item['group'] = 'spigot';
+                 item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+                 item['weight'] = 0;
+                 item['filename'] = body[index];
+                 item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+                 item['version'] = ref_obj['mc_version'];
+                 item['url'] = ref_obj['direct_link'];
 
-                 p.push(JSON.parse(JSON.stringify(profilesItem)));
+                 p.push(JSON.parse(JSON.stringify(item)));
                }});
          }
 
