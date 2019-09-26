@@ -265,7 +265,7 @@ exports.profile_manifests = {
              var filename = body[index];
 
              request(url, function(error, response, body){
-               if(!error && response.statusCode == 200)
+               if(!error)
                {
                  item['id'] = index;
                  item['time'] = new Date(body['date_epoch']).getTime();
@@ -278,6 +278,8 @@ exports.profile_manifests = {
                  item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
                  item['version'] = body['mc_version'];
                  item['url'] = body['direct_link'];
+
+                 //console.log(item);
 
                  p.push(item);
                }});
