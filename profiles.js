@@ -284,7 +284,7 @@ exports.profile_manifests = {
 
                  p.push(item);
                }
-               callback(null, p);
+               callback(error, p);
              });
          }
 
