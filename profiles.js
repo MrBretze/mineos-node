@@ -269,8 +269,7 @@ exports.profile_manifests = {
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
           var filename = body[index];
 
-          request(url, p.push(function(error, response, bodyTwo, callback) {
-            console.log("item");
+          request(url, function(error, response, bodyTwo) {
             if (!error && response.statusCode == 200) {
               var ref_obj = JSON.parse(bodyTwo);
               var item = new profile_template();
@@ -287,13 +286,12 @@ exports.profile_manifests = {
               item['version'] = ref_obj['mc_version'];
               item['release_version'] = '';
               item['url'] = ref_obj['direct_link'];
-
-              console.log(item);
-
-              callback(null, item);
+              console.log("item");
+              p.push(item);
             }
-          }));
+          });
         }
+        callback(null, p);
       } catch (e) {}
       callback(null, p);
     } //end handler
