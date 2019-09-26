@@ -269,8 +269,6 @@ exports.profile_manifests = {
                {
                  var ref_obj = JSON.parse(bodyTwo);
 
-                 console.log(ref_obj);
-
                  item['id'] = index;
                  item['time'] = new Date(ref_obj['date_epoch']).getTime();
                  item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
@@ -283,6 +281,8 @@ exports.profile_manifests = {
                  item['version'] = ref_obj['mc_version'];
                  item['release_version'] = '';
                  item['url'] = ref_obj['direct_link'];
+
+                 console.log(item);
 
                  p.push(item);
                }});
