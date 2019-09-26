@@ -448,14 +448,10 @@ exports.profile_manifests = {
          for (var index in body) {
              var profilesItem = new profile_template();
              var request = require('request');
-
-             console.log(index);
-
              var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
 
-             console.log(url);
 
-             request('https://mcmirror.io/api/file/spigot/{0}'.format(index), function(error, response, body){
+             request(url, function(error, response, body){
                if(!error && response.statusCode == 200)
                {
                  var ref_obj = JSON.parse(body);
