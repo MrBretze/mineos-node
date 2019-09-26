@@ -265,27 +265,30 @@ exports.profile_manifests = {
 
       try {
         for (var index in body) {
-          var request = require('request');
-          var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
-          var filename = body[index];
+          //var request = require('request');
 
-          var ref_obj = JSON.parse(url);
-          var item = new profile_template();
 
-          item['id'] = index;
-          item['time'] = new Date(ref_obj['date_epoch']).getTime();
-          item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-          item['type'] = 'release';
-          item['group'] = 'spigot';
-          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-          item['weight'] = 5;
-          item['filename'] = filename;
-          item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-          item['version'] = ref_obj['mc_version'];
-          item['release_version'] = '';
-          item['url'] = ref_obj['direct_link'];
+          p.push(function (callback) {
+            var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
+            var filename = body[index];
 
-          p.push(item);
+            var ref_obj = JSON.parse(url);
+
+            var item = new profile_template();
+
+            item['id'] = index;
+            item['time'] = new Date(ref_obj['date_epoch']).getTime();
+            item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+            item['type'] = 'release';
+            item['group'] = 'spigot';
+            item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+            item['weight'] = 5;
+            item['filename'] = filename;
+            item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+            item['version'] = ref_obj['mc_version'];
+            item['release_version'] = '';
+            item['url'] = ref_obj['direct_link'];
+          });
         }
       } catch (e) {}
       callback(null, p);
