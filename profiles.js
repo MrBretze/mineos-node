@@ -266,14 +266,12 @@ exports.profile_manifests = {
       try {
         for (var index in body) {
           //var request = require('request');
+          var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
+          var filename = body[index];
 
-
-          p.push(function (callback) {
-            var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
-            var filename = body[index];
+          function getItem(url, filename) {
 
             var ref_obj = JSON.parse(url);
-
             var item = new profile_template();
 
             item['id'] = index;
@@ -290,7 +288,9 @@ exports.profile_manifests = {
             item['url'] = ref_obj['direct_link'];
 
             return item;
-          });
+          }
+
+          p.push(getItem(url, filename));
         }
       } catch (e) {}
       callback(null, p);
