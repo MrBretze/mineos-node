@@ -282,11 +282,10 @@ exports.profile_manifests = {
                  item['release_version'] = '';
                  item['url'] = ref_obj['direct_link'];
 
-                 console.log(item);
-
                  p.push(item);
-               }});
+               }
                callback(null, p);
+             });
          }
 
       } catch (e) {}
