@@ -430,7 +430,7 @@ exports.profile_manifests = {
       try {
         var item = {};
 
-	       for (var index in body.promos) {
+	       for (var index in body) {
 	           var profilesItem = new profile_template();
              var request = require('request');
 
