@@ -281,13 +281,14 @@ exports.profile_manifests = {
                  item['filename'] = filename;
                  item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
                  item['version'] = ref_obj['mc_version'];
+                 item['version'] = '';
                  item['url'] = ref_obj['direct_link'];
 
                  p.push(item);
                }});
          }
 
-         callback(error, p);
+         callback(null, p);
       } catch (e) {}
 
       callback(null, p);
