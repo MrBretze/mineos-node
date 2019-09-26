@@ -428,11 +428,12 @@ exports.profile_manifests = {
       var p = [];
 
       try {
-        var item = {};
 
 	       for (var index in body) {
 	           var profilesItem = new profile_template();
              var request = require('request');
+
+             console.log(index);
 
              request('https://mcmirror.io/api/file/spigot/{0}'.format(index), function(error, response, body){
                if(!error && response.statusCode = 200)
@@ -454,6 +455,8 @@ exports.profile_manifests = {
                  p.push(profilesItem);
                }});
 	       }
+
+        var item = {};
 
         item['id'] = 'BuildTools-latest';
         item['time'] = new Date().getTime();
