@@ -287,6 +287,7 @@ exports.profile_manifests = {
                }});
          }
 
+         callback(error, p);
       } catch (e) {}
 
       callback(null, p);
