@@ -434,7 +434,7 @@ exports.profile_manifests = {
 	           var profilesItem = new profile_template();
              var request = require('request');
 
-             request('', function(error, response, body){
+             request('https://mcmirror.io/api/file/spigot/{0}'.format(index), function(error, response, body){
                if(!error && response.statusCode = 200)
                {
                  var ref_obj = JSON.parse(body);
