@@ -436,12 +436,7 @@ exports.profile_manifests = {
              var request = require('request');
 
              request('https://mcmirror.io/api/file/spigot/{0}'.format(index), function(error, response, body){
-
-               console.log('error:', error); // Print the error if one occurred
-               console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-               console.log('body:', body); // Print the HTML for the Google homepage.
-
-               if(!error && response.statusCode = 200)
+               if(!error && response.statusCode == 200)
                {
                  var ref_obj = JSON.parse(body);
 
