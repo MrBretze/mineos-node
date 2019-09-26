@@ -456,21 +456,19 @@ exports.profile_manifests = {
                {
                  var ref_obj = JSON.parse(body);
 
-                 console.log(ref_obj);
-
-                 profilesItem['id'] = index;
+                 profilesItem['id'] = 0;
                  profilesItem['time'] = new Date(ref_obj['date_epoch']).getTime();
                  profilesItem['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
                  profilesItem['type'] = 'release';
                  profilesItem['group'] = 'spigot';
                  profilesItem['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
                  profilesItem['weight'] = 0;
-                 profilesItem['filename'] = index;
+                 profilesItem['filename'] = body[index];
                  profilesItem['downloaded'] = fs.existsSync(path.join(profile_dir, profilesItem.id, profilesItem.filename));
                  profilesItem['version'] = ref_obj['mc_version'];
                  profilesItem['url'] = ref_obj['direct_link'];
 
-                 p.push(profilesItem);
+                 p.push(JSON.parse(JSON.stringify(profilesItem)));
                }});
          }
 
