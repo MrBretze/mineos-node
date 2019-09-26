@@ -280,7 +280,7 @@ exports.profile_manifests = {
                  item['version'] = ref_obj['mc_version'];
                  item['url'] = ref_obj['direct_link'];
 
-                 p.push(JSON.parse(JSON.stringify(item)));
+                 p.push(item);
                }});
          }
 
