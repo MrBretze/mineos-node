@@ -429,6 +429,8 @@ exports.profile_manifests = {
 
       try {
 
+        console.log('Allo ?')
+
 	       for (var index in body) {
 	           var profilesItem = new profile_template();
              var request = require('request');
