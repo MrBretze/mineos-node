@@ -443,10 +443,9 @@ exports.profile_manifests = {
         item['release_version'] = '';
         item['url'] = 'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar';
 
-        p.push(item);
+        p.push(JSON.parse(JSON.stringify(item)));
 
          for (var index in body) {
-             var profilesItem = new profile_template();
              var request = require('request');
              var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
 
