@@ -284,13 +284,15 @@ exports.profile_manifests = {
                  item['version'] = '';
                  item['url'] = ref_obj['direct_link'];
 
+                 console.log("Added new spigot file: " + filename);
+
                  p.push(item);
                }});
          }
 
-         callback(null, p);
       } catch (e) {}
 
+      console.log("callback");
       callback(null, p);
     } //end handler
   },
