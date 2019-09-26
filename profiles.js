@@ -269,7 +269,7 @@ exports.profile_manifests = {
                {
                  var ref_obj = JSON.parse(body);
 
-                 console.log(ref_obj);
+                 //console.log(ref_obj);
 
                  item['id'] = index;
                  item['time'] = new Date(ref_obj['date_epoch']).getTime();
