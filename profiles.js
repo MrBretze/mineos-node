@@ -265,6 +265,47 @@ exports.profile_manifests = {
       callback(null, p);
     } //end handler
   },
+  craftbukkit: {
+    name: 'CraftBukkit',
+    handler: function(profile_dir, callback) {
+      var p = [];
+
+      try {
+        var item = {};
+
+	item['id'] = 'craftbukkit-1.14.X-latest';
+        item['time'] = new Date().getTime();
+        item['releaseTime'] = new Date().getTime();
+        item['type'] = 'release';
+        item['group'] = 'craftbukkit-1.14.4';
+        item['webui_desc'] = 'Latest Craftbukkit release';
+        item['weight'] = 0;
+        item['filename'] = 'craftbukkit.jar';
+        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+        item['version'] = '1.14.4';
+        item['release_version'] = '';
+        item['url'] = 'https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar';
+        p.push(JSON.parse(JSON.stringify(item)));
+	      
+	item['id'] = 'craftbukkit-1.13.2-latest';
+        item['time'] = new Date().getTime();
+        item['releaseTime'] = new Date().getTime();
+        item['type'] = 'release';
+        item['group'] = 'craftbukkit-1.13.2';
+        item['webui_desc'] = 'Latest Craftbukkit release';
+        item['weight'] = 0;
+        item['filename'] = 'craftbukkit.jar';
+        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+        item['version'] = '1.14.4';
+        item['release_version'] = '';
+        item['url'] = 'https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.13.2.jar';
+        p.push(JSON.parse(JSON.stringify(item)));
+
+      } catch (e) {}
+
+      callback(null, p);
+    } //end handler
+  },
   paperspigot: {
     name: 'PaperSpigot',
     handler: function(profile_dir, callback) {
