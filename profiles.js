@@ -289,7 +289,7 @@ exports.profile_manifests = {
 
               callback(null, item);
             }
-          });
+          }));
         }
       } catch (e) {}
       callback(null, p);
