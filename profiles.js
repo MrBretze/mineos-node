@@ -267,12 +267,13 @@ exports.profile_manifests = {
         for (var index in body) {
           var request = require('request');
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
-          var item = new profile_template();
           var filename = body[index];
 
           request(url, p.push(function(error, response, bodyTwo, callback) {
+            console.log("item");
             if (!error && response.statusCode == 200) {
               var ref_obj = JSON.parse(bodyTwo);
+              var item = new profile_template();
 
               item['id'] = index;
               item['time'] = new Date(ref_obj['date_epoch']).getTime();
@@ -287,7 +288,7 @@ exports.profile_manifests = {
               item['release_version'] = '';
               item['url'] = ref_obj['direct_link'];
 
-              console.log("Info");
+              console.log(item);
 
               callback(null, item);
             }
