@@ -262,7 +262,7 @@ exports.profile_manifests = {
     },
     handler: function(profile_dir, body, callback) {
       var p = [];
-      
+
       try {
         for (var index in body) {
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
@@ -281,8 +281,22 @@ exports.profile_manifests = {
           	res.on('end', function() {
           		json_data = JSON.parse(data);
 
-          		// will output a Javascript object
-          		console.log(json_data);
+              var ref_obj = JSON.parse(bodyTwo);
+
+              item['id'] = index;
+              item['time'] = new Date(ref_obj['date_epoch']).getTime();
+              item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+              item['type'] = 'release';
+              item['group'] = 'spigot';
+              item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+              item['weight'] = 5;
+              item['filename'] = filename;
+              item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+              item['version'] = ref_obj['mc_version'];
+              item['release_version'] = '';
+              item['url'] = ref_obj['direct_link'];
+
+              p.push(item);
           	});
           });
 
