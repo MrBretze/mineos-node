@@ -456,6 +456,8 @@ exports.profile_manifests = {
                {
                  var ref_obj = JSON.parse(body);
 
+                 console.log(body);
+
                  profilesItem['id'] = index;
                  profilesItem['time'] = new Date(ref_obj['date_epoch']).getTime();
                  profilesItem['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
