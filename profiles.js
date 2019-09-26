@@ -287,6 +287,8 @@ exports.profile_manifests = {
               item['release_version'] = '';
               item['url'] = ref_obj['direct_link'];
 
+              console.log(item);
+
               callback(null, item);
             }
           }));
