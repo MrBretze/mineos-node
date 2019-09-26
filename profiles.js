@@ -279,7 +279,7 @@ exports.profile_manifests = {
                  item['version'] = body['mc_version'];
                  item['url'] = body['direct_link'];
 
-                 //console.log(item);
+                 console.log(item);
 
                  p.push(item);
                }});
