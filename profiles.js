@@ -284,10 +284,9 @@ exports.profile_manifests = {
           item['version'] = ref_obj['mc_version'];
           item['release_version'] = '';
           item['url'] = ref_obj['direct_link'];
-          
+
           p.push(item);
         }
-        callback(null, p);
       } catch (e) {}
       callback(null, p);
     } //end handler
