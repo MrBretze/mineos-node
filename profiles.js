@@ -264,12 +264,12 @@ exports.profile_manifests = {
              var item = new profile_template();
              var filename = body[index];
 
-             request(url, function(error, response, body){
+             request(url, function(error, response, bodyTwo){
                if(!error && response.statusCode == 200)
                {
-                 var ref_obj = JSON.parse(body);
+                 var ref_obj = JSON.parse(bodyTwo);
 
-                 //console.log(ref_obj);
+                 console.log(ref_obj);
 
                  item['id'] = index;
                  item['time'] = new Date(ref_obj['date_epoch']).getTime();
@@ -281,13 +281,13 @@ exports.profile_manifests = {
                  item['filename'] = filename;
                  item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
                  item['version'] = ref_obj['mc_version'];
-                 item['version'] = '';
+                 item['release_version'] = ref_obj['mc_version'];
                  item['url'] = ref_obj['direct_link'];
 
-                 console.log("Added new spigot file: " + filename);
-
                  p.push(item);
-               }});
+               }}
+               callback(null, p);
+             );
          }
 
       } catch (e) {}
