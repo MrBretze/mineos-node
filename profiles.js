@@ -451,7 +451,7 @@ exports.profile_manifests = {
 
              console.log(index);
 
-             var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(index);
+             var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
 
              console.log(url);
 
