@@ -449,7 +449,7 @@ exports.profile_manifests = {
              var profilesItem = new profile_template();
              var request = require('request');
 
-             console.log(inde
+             console.log(index);
 
              var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(index);
 
