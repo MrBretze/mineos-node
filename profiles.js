@@ -265,22 +265,22 @@ exports.profile_manifests = {
 
       try {
         for (var index in body) {
-          var getjson = require('get-json');
           var filename = body[index];
 
           var item = new profile_template();
+          var mc_version = filename.split(\-(.*?)\-)[0];
 
-          item['id'] = filename.substring(0, filename.lenght - 34);
+          item['id'] = 'Spigot {0}'.format(mc_version);
           item['time'] = new Date().getTime();
           item['releaseTime'] = new Date().getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
-          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(filename);
+          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(mc_version);
           item['weight'] = 5;
           item['filename'] = filename;
           item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
           item['version'] = 1.0;
-          item['release_version'] = '';
+          item['release_version'] = mc_version;
           item['url'] = 'https://mcmirror.io/files/Spigot/{0}'.format(filename);
 
           p.push(item);
