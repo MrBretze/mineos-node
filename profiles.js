@@ -280,6 +280,7 @@ exports.profile_manifests = {
           }
 
 
+          console.log("URL = " + url);
           var jsonTest = get_json(url);
 
           console.log(jsonTest);
