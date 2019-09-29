@@ -76,7 +76,8 @@
     "which": "1.2.x",
     "whoami": "0.0.x",
     "winston": "1.1.x",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "get-json": "^1.0.1"
   },
   "devDependencies": {
     "nodeunit": "^0.9.5"
