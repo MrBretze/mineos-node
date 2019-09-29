@@ -297,7 +297,7 @@ exports.profile_manifests = {
       p.sort(function(a, b) {
         var itemA = JSON.parse(JSON.stringify(a));
         var itemB = JSON.parse(JSON.stringify(b));
-        return a['releaseTime'] - b['releaseTime'];
+        return b['releaseTime'] - a['releaseTime'];
       });
 
       callback(null, p);
