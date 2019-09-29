@@ -276,17 +276,18 @@ exports.profile_manifests = {
 
           var date = '';
 
-          if (filename.toUpperCase() != 'spigot-latest.jar') {
+          try {
             var dateTimeSplit = filename.split('-')[3];
             var years = dateTimeSplit.substr(0, 4);
             var mounth = dateTimeSplit.substr(4, 2);
             var day = dateTimeSplit.substr(6, 7);
 
-            var date = ''+ years + '-' + mounth + '-' + day +'';
-          } else {
-            var rightNow = new Date();
-            date = rightNow.toISOString().slice(0,10).replace(/-/g,"");
+            date = '' + years + '-' + mounth + '-' + day + '';
+
+          } catch (e) {
+            date = new Date().toISOString();
           }
+
 
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
