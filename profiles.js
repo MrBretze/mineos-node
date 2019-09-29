@@ -137,7 +137,7 @@ exports.profile_manifests = {
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'craftbukkit';
-          item['webui_desc'] = 'CraftBukkit Build For Minecraft: {0}'.format(mc_version);
+          item['webui_desc'] = 'CraftBukkit for Minecraft: {0}'.format(mc_version);
           item['weight'] = 5;
           item['filename'] = filename;
           item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
@@ -154,20 +154,6 @@ exports.profile_manifests = {
       p.sort(function(a, b) {
         var itemA = JSON.parse(JSON.stringify(a));
         var itemB = JSON.parse(JSON.stringify(b));
-
-        if(itemA['id'] == itemB['id'])
-        {
-          var id = itemA['id'];
-          var buildNumber = 1;
-          var splitedID = id.split(" Build ");
-
-          if (splitedID.length > 0)
-          {
-            buildNumber = splitedID[1] + 1;
-          }
-
-          itemA['id'] = itemA['id'] + ' Build {0}'.format(buildNumber);
-        }
 
         return b['releaseTime'] - a['releaseTime'];
       });
@@ -230,20 +216,6 @@ exports.profile_manifests = {
         var itemA = JSON.parse(JSON.stringify(a));
         var itemB = JSON.parse(JSON.stringify(b));
 
-        if(itemA['id'] == itemB['id'])
-        {
-          var id = itemA['id'];
-          var buildNumber = 1;
-          var splitedID = id.split(" Build ");
-
-          if (splitedID.length > 0)
-          {
-            buildNumber = splitedID[1] + 1;
-          }
-
-          itemA['id'] = itemA['id'] + ' Build {0}'.format(buildNumber);
-        }
-
         return b['releaseTime'] - a['releaseTime'];
       });
 
@@ -286,7 +258,7 @@ exports.profile_manifests = {
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
-          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(mc_version);
+          item['webui_desc'] = 'Spigot for Minecraft: {0}'.format(mc_version);
           item['weight'] = 5;
           item['filename'] = filename;
           item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
@@ -302,17 +274,6 @@ exports.profile_manifests = {
       p.sort(function(a, b) {
         var itemA = JSON.parse(JSON.stringify(a));
         var itemB = JSON.parse(JSON.stringify(b));
-
-        if(itemA['id'] == itemB['id'])
-        {
-          var id = itemA['id'];
-          var buildNumber = 1;
-          var splitedID = id.split(" Build ");
-
-          if (splitedID.length > 0)
-          {
-            buildNumber = splitedID[1] + 1;
-          }
 
           itemA['id'] = itemA['id'] + ' Build {0}'.format(buildNumber);
         }
