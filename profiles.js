@@ -265,39 +265,30 @@ exports.profile_manifests = {
 
       try {
         for (var index in body) {
-          //var request = require('request');
+          var getjson = require('get-json');
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
           var filename = body[index];
 
-          var request = require('request');
-
-          request(url, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-              console.log("URL = " + url);
-              console.log("BODY = " + body);
-
-              var ref_obj = JSON.parse(jsonTest);
-              var item = new profile_template();
+          var ref_obj = JSON.parse(getjson(url, response)
+        {
+          var item = new profile_template();
 
 
-              item['id'] = index;
-              item['time'] = new Date(ref_obj['date_epoch']).getTime();
-              item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-              item['type'] = 'release';
-              item['group'] = 'spigot';
-              item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-              item['weight'] = 5;
-              item['filename'] = filename;
-              item['downloaded'] = false;
-              item['version'] = ref_obj['mc_version'];
-              item['release_version'] = '';
-              item['url'] = ref_obj['direct_link'];
+          item['id'] = index;
+          item['time'] = new Date(ref_obj['date_epoch']).getTime();
+          item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+          item['type'] = 'release';
+          item['group'] = 'spigot';
+          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+          item['weight'] = 5;
+          item['filename'] = filename;
+          item['downloaded'] = false;
+          item['version'] = ref_obj['mc_version'];
+          item['release_version'] = '';
+          item['url'] =
 
-              p.push(item);
-            }
-          });
-
-
+          p.push(item);
+        });
         }
       } catch (e) {
         console.log(e);
