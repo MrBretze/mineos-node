@@ -278,7 +278,6 @@ exports.profile_manifests = {
           var mounth = dateTimeSplit.substr(4, 2);
           var day = dateTimeSplit.substr(6, 7);
           var date = ''+ years + '-' + mounth + '-' + day +'';
-
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
@@ -296,8 +295,9 @@ exports.profile_manifests = {
       }
 
       p.sort(function(a, b) {
-
-        return a['releaseTime'].getTime() - b['releaseTime'].getTime();
+        var itemA = JSON.parse(JSON.stringify(a));
+        var itemB = JSON.parse(JSON.stringify(b));
+        return a['releaseTime'] - b['releaseTime'];
       });
 
       callback(null, p);
