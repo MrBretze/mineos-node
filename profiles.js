@@ -272,6 +272,8 @@ exports.profile_manifests = {
           var ref_obj = JSON.parse(url);
           var item = new profile_template();
 
+          console.log('Test 1');
+
           item['id'] = index;
           //item['time'] = new Date(ref_obj['date_epoch']).getTime();
           //item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
@@ -285,11 +287,12 @@ exports.profile_manifests = {
           item['release_version'] = '';
           item['url'] = ref_obj['direct_link'];
 
+          console.log('Test 2');
+
           p.push(item);
-
-
         }
       } catch (e) {}
+
       callback(null, p);
     } //end handler
   },
