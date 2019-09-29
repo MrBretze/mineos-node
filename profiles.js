@@ -263,13 +263,14 @@ exports.profile_manifests = {
     handler: function(profile_dir, body, callback) {
       var p = [];
 
+      var lastTimeForMC144
+
       try {
         for (var index in body) {
           var filename = body[index];
 
           var item = new profile_template();
           var mc_version = filename.split('-')[1];
-          //Spigot-1.12.2-95dd097_3e3bbd4-20171107-0939.jar
           item['id'] = 'Spigot {0}'.format(mc_version);
           item['time'] = new Date().getTime();
           var dateTimeSplit = 'Spigot-1.13-1503de9_53d3ac0-20180806-0232.jar'.split('-')[3];
@@ -293,7 +294,9 @@ exports.profile_manifests = {
       } catch (e) {
         console.log(e);
       }
-
+      p.sort(function(a, b) {
+        return a.releaseTime.getTime() - b.releaseTime.getTime();
+      });
       callback(null, p);
     } //end handler
   },
