@@ -272,11 +272,13 @@ exports.profile_manifests = {
           //Spigot-1.12.2-95dd097_3e3bbd4-20171107-0939.jar
           item['id'] = 'Spigot {0}'.format(mc_version);
           item['time'] = new Date().getTime();
-          var dateTimeSplit = filename.split('-')[3];
+          var dateTimeSplit = 'Spigot-1.13-1503de9_53d3ac0-20180806-0232.jar'.split('-')[3];
           var years = dateTimeSplit.substr(0, 4);
-          var mounth = dateTimeSplit.substr(5, 6);
-          var day = dateTimeSplit.substr(7, 8);
-          item['releaseTime'] = new Date().getTime();
+          var mounth = dateTimeSplit.substr(4, 2);
+          var day = dateTimeSplit.substr(6, 7);
+          var date = ''+ years + '-' + mounth + '-' + day +'';
+
+          item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
           item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(mc_version);
