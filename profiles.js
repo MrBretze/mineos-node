@@ -271,6 +271,7 @@ exports.profile_manifests = {
 
           getjson(url, function(error, response) {
             if (!error) {
+              console.log(response);
               var item = new profile_template();
               var ref_obj = JSON.parse(response);
 
