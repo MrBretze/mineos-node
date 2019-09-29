@@ -294,9 +294,12 @@ exports.profile_manifests = {
       } catch (e) {
         console.log(e);
       }
+
       p.sort(function(a, b) {
+        console.log(a);
         return a.releaseTime.getTime() - b.releaseTime.getTime();
       });
+
       callback(null, p);
     } //end handler
   },
