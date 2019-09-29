@@ -263,6 +263,8 @@ exports.profile_manifests = {
     handler: function(profile_dir, body, callback) {
       var p = [];
 
+      emitter.setMaxListeners(50);
+
       try {
         for (var index in body) {
           //var request = require('request');
