@@ -272,18 +272,10 @@ exports.profile_manifests = {
           function get_json(url, callback) {
             var request = require('request');
 
-            request.get({
-                url: url,
-                json: true,
-                headers: {'User-Agent': 'request'}
-              }, (err, res, data) => {
-                if (err) {
-                  console.log('Error:', err);
-                } else if (res.statusCode !== 200) {
-                  console.log('Status:', res.statusCode);
-                } else {
-                  callback(null, data);
-                }
+            request(url, function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                 callback(null, body)
+              }
             });
           }
 
