@@ -276,7 +276,7 @@ exports.profile_manifests = {
 
           var date = '';
 
-          if (!filename.equals('spigot-latest.jar')) {
+          if (filename.toUpperCase() != 'spigot-latest.jar') {
             var dateTimeSplit = filename.split('-')[3];
             var years = dateTimeSplit.substr(0, 4);
             var mounth = dateTimeSplit.substr(4, 2);
