@@ -275,9 +275,6 @@ exports.profile_manifests = {
         var itemA = JSON.parse(JSON.stringify(a));
         var itemB = JSON.parse(JSON.stringify(b));
 
-          itemA['id'] = itemA['id'] + ' Build {0}'.format(buildNumber);
-        });
-
         return b['releaseTime'] - a['releaseTime'];
       });
 
