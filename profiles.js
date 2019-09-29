@@ -291,7 +291,9 @@ exports.profile_manifests = {
 
           p.push(item);
         }
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
 
       callback(null, p);
     } //end handler
