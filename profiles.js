@@ -263,46 +263,48 @@ exports.profile_manifests = {
     handler: function(profile_dir, body, callback) {
       var p = [];
 
-      emitter.setMaxListeners(50);
-
       try {
         for (var index in body) {
           //var request = require('request');
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
           var filename = body[index];
 
-          var request = require('request');
+          function get_json(url, callback) {
+            var request = require('request');
 
-          request.get({
-              url: url,
-              json: true,
-              headers: {'User-Agent': 'request'}
-            }, (err, res, data) => {
-              if (err) {
-                console.log('Error:', err);
-              } else if (res.statusCode !== 200) {
-                console.log('Status:', res.statusCode);
-              } else {
-                var ref_obj = JSON.parse(data);
-                var item = new profile_template();
+            request.get({
+                url: url,
+                json: true,
+                headers: {'User-Agent': 'request'}
+              }, (err, res, data) => {
+                if (err) {
+                  console.log('Error:', err);
+                } else if (res.statusCode !== 200) {
+                  console.log('Status:', res.statusCode);
+                } else {
+                  callback(null, data);
+                }
+            });
+
+            var ref_obj = JSON.parse(get_json(url));
+            var item = new profile_template();
 
 
-                item['id'] = index;
-                item['time'] = new Date(ref_obj['date_epoch']).getTime();
-                item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-                item['type'] = 'release';
-                item['group'] = 'spigot';
-                item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-                item['weight'] = 5;
-                item['filename'] = filename;
-                item['downloaded'] = false;
-                item['version'] = ref_obj['mc_version'];
-                item['release_version'] = '';
-                item['url'] = ref_obj['direct_link'];
+            item['id'] = index;
+            item['time'] = new Date(ref_obj['date_epoch']).getTime();
+            item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+            item['type'] = 'release';
+            item['group'] = 'spigot';
+            item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+            item['weight'] = 5;
+            item['filename'] = filename;
+            item['downloaded'] = false;
+            item['version'] = ref_obj['mc_version'];
+            item['release_version'] = '';
+            item['url'] = ref_obj['direct_link'];
 
-                p.push(item);
-              }
-          });
+            p.push(item);
+          }
         }
       } catch (e) {
         console.log(e);
