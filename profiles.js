@@ -288,6 +288,7 @@ exports.profile_manifests = {
             item['url'] = ref_obj['direct_link'];
 
             callback(null, item)
+            return item;
           });
 
 
