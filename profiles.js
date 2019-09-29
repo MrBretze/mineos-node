@@ -269,7 +269,7 @@ exports.profile_manifests = {
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
           var filename = body[index];
 
-          p.push(function getItem(url, filename, callback) {
+          p.push(function(url, filename, callback) {
 
             var ref_obj = JSON.parse(url);
             var item = new profile_template();
