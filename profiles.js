@@ -269,9 +269,13 @@ exports.profile_manifests = {
 
           var item = new profile_template();
           var mc_version = filename.split('-')[1];
-
+          //Spigot-1.12.2-95dd097_3e3bbd4-20171107-0939.jar
           item['id'] = 'Spigot {0}'.format(mc_version);
           item['time'] = new Date().getTime();
+          var dateTimeSplit = filename.split('-')[3];
+          var years = dateTimeSplit.substr(0, 4);
+          var mounth = dateTimeSplit.substr(5, 6);
+          var day = dateTimeSplit.substr(7, 8);
           item['releaseTime'] = new Date().getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
