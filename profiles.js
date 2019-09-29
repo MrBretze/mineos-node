@@ -274,13 +274,14 @@ exports.profile_manifests = {
 
             request(url, function (error, response, body) {
               if (!error && response.statusCode == 200) {
+                console.log("URL = " + url);
+                console.log("BODY = " + body);
                  callback(null, body)
               }
             });
           }
 
 
-          console.log("URL = " + url);
           var jsonTest = get_json(url);
 
           console.log(jsonTest);
