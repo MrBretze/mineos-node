@@ -273,8 +273,8 @@ exports.profile_manifests = {
           var item = new profile_template();
 
           item['id'] = index;
-          item['time'] = new Date(ref_obj['date_epoch']).getTime();
-          item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+          //item['time'] = new Date(ref_obj['date_epoch']).getTime();
+          //item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
           item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
