@@ -266,31 +266,24 @@ exports.profile_manifests = {
       try {
         for (var index in body) {
           var getjson = require('get-json');
-          var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
           var filename = body[index];
 
-          getjson(url, function(error, response) {
-            if (!error) {
-              console.log(response);
-              var item = new profile_template();
-              var ref_obj = JSON.parse(response);
+          var item = new profile_template();
 
-              item['id'] = index;
-              item['time'] = new Date(ref_obj['date_epoch']).getTime();
-              item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-              item['type'] = 'release';
-              item['group'] = 'spigot';
-              item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-              item['weight'] = 5;
-              item['filename'] = filename;
-              item['downloaded'] = false;
-              item['version'] = ref_obj['mc_version'];
-              item['release_version'] = '';
-              item['url'] =
+          item['id'] = index;
+          item['time'] = new Date().getTime();
+          item['releaseTime'] = new Date().getTime();
+          item['type'] = 'release';
+          item['group'] = 'spigot';
+          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format('1.0');
+          item['weight'] = 5;
+          item['filename'] = filename;
+          item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
+          item['version'] = 1.0;
+          item['release_version'] = '';
+          item['url'] = 'https://mcmirror.io/files/Spigot/{0}'.format(filename);
 
-                p.push(item);
-            }
-          })
+          p.push(item);
         }
       } catch (e) {
         console.log(e);
