@@ -269,6 +269,8 @@ exports.profile_manifests = {
           var url = 'https://mcmirror.io/api/file/spigot/{0}'.format(body[index]);
           var filename = body[index];
 
+          p.push(getItem(url, filename));
+
           function getItem(url, filename) {
 
             var ref_obj = JSON.parse(url);
@@ -289,8 +291,6 @@ exports.profile_manifests = {
 
             return item;
           }
-
-          p.push(getItem(url, filename));
         }
       } catch (e) {}
       callback(null, p);
