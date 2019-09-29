@@ -116,7 +116,7 @@ exports.profile_manifests = {
 
           var item = new profile_template();
           var mc_version = filename.split('-')[1];
-          item['id'] = 'CraftBukkit {0} ({1})'.format(mc_version, index);
+
           item['time'] = new Date().getTime();
 
           var date = '';
@@ -130,10 +130,10 @@ exports.profile_manifests = {
             date = '' + years + '-' + mounth + '-' + day + '';
 
           } catch (e) {
-            date = new Date().toISOString();
+            date = new Date().toISOString().split('T')[0];
           }
 
-
+          item['id'] = 'CraftBukkit {0} ({1})'.format(mc_version, date);
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
@@ -167,7 +167,7 @@ exports.profile_manifests = {
 
           var item = new profile_template();
           var mc_version = filename.split('-')[1];
-          item['id'] = 'PaperSpigot {0} ({1})'.format(mc_version, index);
+
           item['time'] = new Date().getTime();
 
           var date = '';
@@ -181,9 +181,10 @@ exports.profile_manifests = {
             date = '' + years + '-' + mounth + '-' + day + '';
 
           } catch (e) {
-            date = new Date().toISOString();
+            date = new Date().toISOString().split('T')[0];
           }
 
+          item['id'] = 'PaperSpigot {0} ({1})'.format(mc_version, date);
 
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
@@ -218,7 +219,7 @@ exports.profile_manifests = {
 
           var item = new profile_template();
           var mc_version = filename.split('-')[1];
-          item['id'] = 'Spigot {0} ({1})'.format(mc_version, index);
+
           item['time'] = new Date().getTime();
 
           var date = '';
@@ -232,10 +233,10 @@ exports.profile_manifests = {
             date = '' + years + '-' + mounth + '-' + day + '';
 
           } catch (e) {
-            date = new Date().toISOString();
+            date = new Date().toISOString().split('T')[0];
           }
 
-
+          item['id'] = 'Spigot {0} ({1})'.format(mc_version, date);
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
