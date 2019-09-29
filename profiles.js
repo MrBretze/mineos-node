@@ -270,12 +270,12 @@ exports.profile_manifests = {
 
           var item = new profile_template();
 
-          item['id'] = index;
+          item['id'] = filename.substring(0, filename.lenght - 34);
           item['time'] = new Date().getTime();
           item['releaseTime'] = new Date().getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
-          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format('1.0');
+          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(filename);
           item['weight'] = 5;
           item['filename'] = filename;
           item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
