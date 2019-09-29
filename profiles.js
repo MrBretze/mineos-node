@@ -157,7 +157,7 @@ exports.profile_manifests = {
     request_args: {
       url: 'https://mcmirror.io/api/list/paper',
       json: true
-    }
+    },
     handler: function(profile_dir, body, callback) {
       var p = [];
 
