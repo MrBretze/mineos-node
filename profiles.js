@@ -296,8 +296,8 @@ exports.profile_manifests = {
       }
 
       p.sort(function(a, b) {
-        console.log(a);
-        return a.releaseTime.getTime() - b.releaseTime.getTime();
+
+        return a['releaseTime'].getTime() - b['releaseTime'].getTime();
       });
 
       callback(null, p);
