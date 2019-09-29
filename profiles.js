@@ -268,7 +268,7 @@ exports.profile_manifests = {
           var filename = body[index];
 
           var item = new profile_template();
-          var mc_version = filename.slice(7).substring(0, body[index].indexOf('-') - 1);
+          var mc_version = filename.slice(7).substring(0, body[index].split('-')[1] - 1);
 
           item['id'] = 'Spigot {0}'.format(mc_version);
           item['time'] = new Date().getTime();
@@ -282,7 +282,6 @@ exports.profile_manifests = {
           item['version'] = 1.0;
           item['release_version'] = mc_version;
           item['url'] = 'https://mcmirror.io/files/Spigot/{0}'.format(filename);
-
           p.push(item);
         }
       } catch (e) {
