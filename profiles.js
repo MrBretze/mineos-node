@@ -270,23 +270,25 @@ exports.profile_manifests = {
           var filename = body[index];
 
           getjson(url, function(error, response) {
-            var item = new profile_template();
-            var ref_obj = JSON.parse(response);
+            if (!error) {
+              var item = new profile_template();
+              var ref_obj = JSON.parse(response);
 
-            item['id'] = index;
-            item['time'] = new Date(ref_obj['date_epoch']).getTime();
-            item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
-            item['type'] = 'release';
-            item['group'] = 'spigot';
-            item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
-            item['weight'] = 5;
-            item['filename'] = filename;
-            item['downloaded'] = false;
-            item['version'] = ref_obj['mc_version'];
-            item['release_version'] = '';
-            item['url'] =
+              item['id'] = index;
+              item['time'] = new Date(ref_obj['date_epoch']).getTime();
+              item['releaseTime'] = new Date(ref_obj['date_epoch']).getTime();
+              item['type'] = 'release';
+              item['group'] = 'spigot';
+              item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(ref_obj['mc_version']);
+              item['weight'] = 5;
+              item['filename'] = filename;
+              item['downloaded'] = false;
+              item['version'] = ref_obj['mc_version'];
+              item['release_version'] = '';
+              item['url'] =
 
-            p.push(item);
+                p.push(item);
+            }
           })
         }
       } catch (e) {
