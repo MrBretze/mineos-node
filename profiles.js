@@ -268,7 +268,7 @@ exports.profile_manifests = {
           var filename = body[index];
 
           var item = new profile_template();
-          var mc_version = filename.split(\-(.*?)\-)[0];
+          var mc_version = filename.split('\-(.*?)\-')[0];
 
           item['id'] = 'Spigot {0}'.format(mc_version);
           item['time'] = new Date().getTime();
