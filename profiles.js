@@ -271,7 +271,7 @@ exports.profile_manifests = {
 
           p.push(getItem(url, filename));
 
-          function getItem(url, filename) {
+          function getItem(url, filename, callback) {
 
             var ref_obj = JSON.parse(url);
             var item = new profile_template();
@@ -289,7 +289,7 @@ exports.profile_manifests = {
             item['release_version'] = '';
             item['url'] = ref_obj['direct_link'];
 
-            return item;
+            callback(null, item)
           }
         }
       } catch (e) {}
