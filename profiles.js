@@ -103,167 +103,12 @@ exports.profile_manifests = {
   },
   craftbukkit: {
     name: 'CraftBukkit',
-    handler: function(profile_dir, callback) {
-      var p = [];
-
-      try {
-        var item = {};
-
-        item['id'] = 'craftbukkit-1.14.4-latest';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'Craft-Bukkit';
-        item['webui_desc'] = 'Latest Craftbukkit release';
-        item['weight'] = 0;
-        item['filename'] = 'craftbukkit.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = '1.14.4';
-        item['release_version'] = '';
-        item['url'] = 'https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar';
-        p.push(JSON.parse(JSON.stringify(item)));
-
-        item['id'] = 'craftbukkit-1.13.2-latest';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'Craft-Bukkit';
-        item['webui_desc'] = 'Latest Craftbukkit release';
-        item['weight'] = 0;
-        item['filename'] = 'craftbukkit.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = '1.14.4';
-        item['release_version'] = '';
-        item['url'] = 'https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.13.2.jar';
-        p.push(JSON.parse(JSON.stringify(item)));
-
-      } catch (e) {}
-
-      callback(null, p);
-    } //end handler
-  },
-  paperspigot: {
-    name: 'PaperSpigot',
-    handler: function(profile_dir, callback) {
-      var p = [];
-
-      try {
-        var item = {};
-
-        item['id'] = 'paperspigot-1.14.X-latest';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'paperspigot';
-        item['webui_desc'] = 'Latest paperclip release';
-        item['weight'] = 0;
-        item['filename'] = 'paperclip.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = '1.13.3';
-        item['release_version'] = '';
-        item['url'] = 'https://papermc.io/ci/job/Paper-1.14/lastSuccessfulBuild/artifact/paperclip.jar';
-        p.push(JSON.parse(JSON.stringify(item)));
-
-        item['id'] = 'paperspigot-1.13.2-latest';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'paperspigot';
-        item['webui_desc'] = 'Latest paperclip release';
-        item['weight'] = 0;
-        item['filename'] = 'paperclip.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = '1.13.2';
-        item['release_version'] = '';
-        item['url'] = 'https://papermc.io/ci/job/Paper-1.13/lastSuccessfulBuild/artifact/paperclip.jar';
-        p.push(JSON.parse(JSON.stringify(item)));
-
-        item['id'] = 'paperspigot-1.12.2-latest';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'paperspigot';
-        item['webui_desc'] = 'Latest paperclip release';
-        item['weight'] = 0;
-        item['filename'] = 'paperclip.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = '1.12.2';
-        item['release_version'] = '';
-        item['url'] = 'https://papermc.io/ci/job/Paper/lastSuccessfulBuild/artifact/paperclip.jar';
-        p.push(JSON.parse(JSON.stringify(item)));
-
-        item['version'] = '1104';
-        item['id'] = 'paperspigot-{0}'.format(item.version);
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'paperspigot';
-        item['release_version'] = '1.11.2';
-        item['webui_desc'] = 'Paperclip build {0} (mc version: {1})'.format(item.version, item['release_version']);
-        item['weight'] = 0;
-        item['filename'] = 'paperclip.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/paperclip.jar'.format(item.version);
-        p.push(JSON.parse(JSON.stringify(item)));
-
-        item['version'] = '916';
-        item['id'] = 'paperspigot-{0}'.format(item.version);
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'paperspigot';
-        item['release_version'] = '1.10.2';
-        item['webui_desc'] = 'Paperclip build {0} (mc version: {1})'.format(item.version, item['release_version']);
-        item['weight'] = 0;
-        item['filename'] = 'paperclip.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/paperclip.jar'.format(item.version);
-        p.push(JSON.parse(JSON.stringify(item)));
-
-        item['version'] = '773';
-        item['id'] = 'paperspigot-{0}'.format(item.version);
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'paperspigot';
-        item['release_version'] = '1.9.4';
-        item['webui_desc'] = 'Paperclip build {0} (mc version: {1})'.format(item.version, item['release_version']);
-        item['weight'] = 0;
-        item['filename'] = 'paperclip.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/paperclip.jar'.format(item.version);
-        p.push(JSON.parse(JSON.stringify(item)));
-
-        item['version'] = '443';
-        item['id'] = 'paperspigot-{0}'.format(item.version);
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'paperspigot';
-        item['release_version'] = '1.8.8';
-        item['webui_desc'] = 'Paperclip build {0} (mc version: {1})'.format(item.version, item['release_version']);
-        item['weight'] = 0;
-        item['filename'] = 'paperclip.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['url'] = 'https://papermc.io/ci/job/Paper/{0}/artifact/Paperclip.jar'.format(item.version);
-        //uppercase Paperclip.jar for some reason (old convention, perhaps)
-        p.push(JSON.parse(JSON.stringify(item)));
-
-      } catch (e) {}
-
-      callback(null, p);
-    } //end handler
-  },
-  spigot: {
-    name: 'Spigot',
     request_args: {
-      url: 'https://mcmirror.io/api/list/spigot',
+      url: 'https://mcmirror.io/api/list/craftbukkit',
       json: true
-    },
-    handler: function(profile_dir, body, callback) {
+    }
+    handler: function(profile_dir, callback) {
       var p = [];
-
-      var lastTimeForMC144
 
       try {
         for (var index in body) {
@@ -271,7 +116,7 @@ exports.profile_manifests = {
 
           var item = new profile_template();
           var mc_version = filename.split('-')[1];
-          item['id'] = 'Spigot {0}'.format(mc_version);
+          item['id'] = 'CraftBukkit {0} ({1})'.format(mc_version, index);
           item['time'] = new Date().getTime();
 
           var date = '';
@@ -292,7 +137,109 @@ exports.profile_manifests = {
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
-          item['webui_desc'] = '{1} Spigot Build For Minecraft: {0}'.format(mc_version, date);
+          item['webui_desc'] = 'CraftBukkit Build For Minecraft: {0}'.format(mc_version);
+          item['weight'] = 5;
+          item['filename'] = filename;
+          item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
+          item['version'] = 1.0;
+          item['release_version'] = mc_version;
+          item['url'] = 'https://mcmirror.io/files/CraftBukkit/{0}'.format(filename);
+          p.push(item);
+        }
+
+      } catch (e) {}
+
+      callback(null, p);
+    } //end handler
+  },
+  paperspigot: {
+    name: 'PaperSpigot',
+    request_args: {
+      url: 'https://mcmirror.io/api/list/paper',
+      json: true
+    }
+    handler: function(profile_dir, body, callback) {
+      var p = [];
+
+      try {
+        for (var index in body) {
+          var filename = body[index];
+
+          var item = new profile_template();
+          var mc_version = filename.split('-')[1];
+          item['id'] = 'PaperSpigot {0} ({1})'.format(mc_version, index);
+          item['time'] = new Date().getTime();
+
+          var date = '';
+
+          try {
+            var dateTimeSplit = filename.split('-')[3];
+            var years = dateTimeSplit.substr(0, 4);
+            var mounth = dateTimeSplit.substr(4, 2);
+            var day = dateTimeSplit.substr(6, 7);
+
+            date = '' + years + '-' + mounth + '-' + day + '';
+
+          } catch (e) {
+            date = new Date().toISOString();
+          }
+
+
+          item['releaseTime'] = new Date(date).getTime();
+          item['type'] = 'release';
+          item['group'] = 'paper';
+          item['webui_desc'] = 'PaperSpigot Build For Minecraft: {0}'.format(mc_version);
+          item['weight'] = 5;
+          item['filename'] = filename;
+          item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
+          item['version'] = 1.0;
+          item['release_version'] = mc_version;
+          item['url'] = 'https://mcmirror.io/files/Paper/{0}'.format(filename);
+          p.push(item);
+        }
+
+      } catch (e) {}
+
+      callback(null, p);
+    } //end handler
+  },
+  spigot: {
+    name: 'Spigot',
+    request_args: {
+      url: 'https://mcmirror.io/api/list/spigot',
+      json: true
+    },
+    handler: function(profile_dir, body, callback) {
+      var p = [];
+
+      try {
+        for (var index in body) {
+          var filename = body[index];
+
+          var item = new profile_template();
+          var mc_version = filename.split('-')[1];
+          item['id'] = 'Spigot {0} ({1})'.format(mc_version, index);
+          item['time'] = new Date().getTime();
+
+          var date = '';
+
+          try {
+            var dateTimeSplit = filename.split('-')[3];
+            var years = dateTimeSplit.substr(0, 4);
+            var mounth = dateTimeSplit.substr(4, 2);
+            var day = dateTimeSplit.substr(6, 7);
+
+            date = '' + years + '-' + mounth + '-' + day + '';
+
+          } catch (e) {
+            date = new Date().toISOString();
+          }
+
+
+          item['releaseTime'] = new Date(date).getTime();
+          item['type'] = 'release';
+          item['group'] = 'spigot';
+          item['webui_desc'] = 'Spigot Build For Minecraft: {0}'.format(mc_version);
           item['weight'] = 5;
           item['filename'] = filename;
           item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
