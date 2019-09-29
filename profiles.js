@@ -280,7 +280,11 @@ exports.profile_manifests = {
           }
 
 
-          var ref_obj = JSON.parse(get_json(url));
+          var jsonTest = get_json(url);
+
+          console.log(jsonTest);
+
+          var ref_obj = JSON.parse(jsonTest);
           var item = new profile_template();
 
 
