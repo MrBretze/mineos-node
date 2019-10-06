@@ -35,7 +35,8 @@
   "PLAYERS_ONLINE": "Joueurs en ligne",
   "UPTIME": "Durée de fonctionnent",
   "RAM_FREE": "RAM libre",
-
+  "CPU_USAGE": "Utilisation du CPU (%)",
+  
   "LOAD_AVERAGES": "Moyennes de charge",
   "SERVER": "Serveur",
   "TYPE": "Type",
