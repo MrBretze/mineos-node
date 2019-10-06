@@ -1,7 +1,6 @@
 var async = require('async');
 var path = require('path');
 var fs = require('fs-extra');
-var urlExists = require('url-exists');
 
 function profile_template() {
   return {
