@@ -232,25 +232,34 @@ exports.profile_manifests = {
         if (buildNumber > 1104)
         {
           item['webui_desc'] = "PaperSpigot for Minecraft 1.12.X";
+
+          item['version'] = 1.12;
         } else if(buildNumber <= 1104 && buildNumber > 916)
         {
           item['webui_desc'] = "PaperSpigot for Minecraft 1.11.X";
+
+          item['version'] = 1.11;
         } else if (buildNumber <= 916 && buildNumber > 773)
         {
           item['webui_desc'] = "PaperSpigot for Minecraft 1.10.X";
+
+          item['version'] = 1.10;
         } else if(buildNumber <=  773 && buildNumber > 443)
         {
           item['webui_desc'] = "PaperSpigot for Minecraft 1.9.4";
+
+          item['version'] = 1.9;
         } else if (buildNumber <= 443)
         {
           item['webui_desc'] = "PaperSpigot for Minecraft 1.8.X";
+
+          item['version'] = 1.8;
         }
 
         item['weight'] = 0;
         item['filename'] = 'paperclip-{0}.jar'.format(buildNumber);
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = buildNumber;
-        item['release_version'] = '';
+        item['release_version'] = buildNumber;
         item['url'] = url;
 
         p.push(JSON.parse(JSON.stringify(item)));
