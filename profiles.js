@@ -207,6 +207,104 @@ exports.profile_manifests = {
       callback();
     } //end handler
   },
+  paperspigot113: {
+    name: 'PaperSpigot-1.13',
+    request_args: {
+      url: 'https://papermc.io/ci/job/Paper-1.13/api/json',
+      json: true
+    },
+    handler: function (profile_dir, body, callback) {
+      var p = []
+
+      for (var index in body.builds) {
+        var paperbuild = body.builds[index];
+        var buildNumber = paperbuild["number"];
+
+        var url = "https://papermc.io/ci/job/Paper/{0}/artifact/paperclip-{0}.jar".format(buildNumber).trim();
+
+        var item = new profile_template();
+
+        item['id'] = 'PaperSpigot-{0}'.format(buildNumber).trim();
+        item['time'] = new Date().getTime();
+        item['releaseTime'] = new Date().getTime();
+        item['type'] = 'release';
+        item['group'] = 'PaperSpigot';
+        if (buildNumber > 1104)
+        {
+          item['webui_desc'] = "PaperSpigot for Minecraft 1.12.X";
+        } else if(buildNumber <= 1104 && buildNumber > 916)
+        {
+          item['webui_desc'] = "PaperSpigot for Minecraft 1.11.X";
+        } else if (buildNumber <= 916 && buildNumber > 773)
+        {
+          item['webui_desc'] = "PaperSpigot for Minecraft 1.10.X";
+        } else if(buildNumber <=  773 && buildNumber > 443)
+        {
+          item['webui_desc'] = "PaperSpigot for Minecraft 1.9.4";
+        } else if (buildNumber <= 443)
+        {
+          item['webui_desc'] = "PaperSpigot for Minecraft 1.8.X";
+        }
+
+        item['weight'] = 0;
+        item['filename'] = 'paperclip-{0}.jar'.format(buildNumber);
+        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+        item['version'] = buildNumber;
+        item['release_version'] = '';
+        item['url'] = url;
+
+        p.push(JSON.parse(JSON.stringify(item)));
+      }
+
+      
+      //var item = new profile_template();
+
+
+      callback(null, p);
+    },
+    postdownload: function (profile_dir, dest_filepath, callback) {
+      callback();
+    } //end handler
+  },
+  paperspigot112: {
+    name: 'PaperSpigot-1.X.X',
+    request_args: {
+      url: 'https://papermc.io/ci/job/Paper/api/json',
+      json: true
+    },
+    handler: function (profile_dir, body, callback) {
+      var p = []
+
+      for (var index in body.builds) {
+        var paperbuild = body.builds[index];
+        var buildNumber = paperbuild["number"];
+
+        var url = "https://papermc.io/ci/job/Paper-1.13/{0}/artifact/paperclip-{0}.jar".format(buildNumber).trim();
+
+        var item = new profile_template();
+
+        item['id'] = 'PaperSpigot-{0}'.format(buildNumber).trim();
+        item['time'] = new Date().getTime();
+        item['releaseTime'] = new Date().getTime();
+        item['type'] = 'release';
+        item['group'] = 'PaperSpigot';
+        item['webui_desc'] = "PaperSpigot for Minecraft 1.13.X";
+        item['weight'] = 0;
+        item['filename'] = 'paperclip-{0}.jar'.format(buildNumber);
+        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+        item['version'] = buildNumber;
+        item['release_version'] = '';
+        item['url'] = url;
+
+        p.push(JSON.parse(JSON.stringify(item)));
+      }
+
+      callback(null, p);
+    },
+    postdownload: function (profile_dir, dest_filepath, callback) {
+      callback();
+    } //end handler
+  },
   spigot: {
     name: 'Spigot',
     request_args: {
