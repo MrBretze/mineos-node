@@ -1,6 +1,7 @@
 var async = require('async');
 var path = require('path');
 var fs = require('fs-extra');
+var urlExists = require('url-exists');
 
 function profile_template() {
   return {
@@ -54,39 +55,49 @@ exports.profile_manifests = {
           var item = new profile_template();
           var ref_obj = body.versions[index];
 
-          item['id'] = ref_obj['id'];
-          item['time'] = ref_obj['time'];
-          item['releaseTime'] = ref_obj['releaseTime'];
-          item['group'] = 'mojang';
-          item['webui_desc'] = 'Official Mojang Jar';
-          item['weight'] = 0;
-          item['filename'] = 'minecraft_server.{0}.jar'.format(ref_obj['id']);
-          item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-          item['version'] = ref_obj['id'];
-          item['release_version'] = ref_obj['id'];
-          item['url'] = 'https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar'.format(item.version);
+          if (ref_obj['id'] != 1.1 && ref_obj['id'] != 1.0)
+          {
+            item['id'] = ref_obj['id'];
+            item['time'] = ref_obj['time'];
+            item['releaseTime'] = ref_obj['releaseTime'];
+            item['group'] = 'mojang';
+            item['webui_desc'] = 'Official Mojang Jar';
+            item['weight'] = 0;
+            item['filename'] = 'minecraft_server.{0}.jar'.format(ref_obj['id']);
+            item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+            item['version'] = ref_obj['id'];
+            item['release_version'] = ref_obj['id'];
+            
+            if (ref_obj['id'] == '1.2.3' || ref_obj['id'] == '1.2.2' || ref_obj['id'] == '1.2.1')
+            {
+              item['url'] = 'http://assets.minecraft.net/1_2/minecraft_server.jar';
+            } else {
+              item['url'] = 'https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar'.format(item.version);
+            }
+            
 
-          switch (ref_obj['type']) {
-            case 'release':
-              item['type'] = ref_obj['type'];
-              q.push({
-                id: item['id'],
-                url: ref_obj.url
-              });
-              p.push(item);
-              break;
-            case 'snapshot':
-              item['type'] = ref_obj['type'];
-              q.push({
-                id: item['id'],
-                url: ref_obj.url
-              });
-              p.push(item);
-              break;
-            default:
-              item['type'] = 'old_version'; //old_alpha, old_beta
-              //q.push({ id: item['id'], url: ref_obj.url });
-              break;
+            switch (ref_obj['type']) {
+              case 'release':
+                item['type'] = ref_obj['type'];
+                q.push({
+                  id: item['id'],
+                  url: ref_obj.url
+                });
+                p.push(item);
+                break;
+              case 'snapshot':
+                item['type'] = ref_obj['type'];
+                q.push({
+                  id: item['id'],
+                  url: ref_obj.url
+                });
+                p.push(item);
+                break;
+              default:
+                item['type'] = 'old_version'; //old_alpha, old_beta
+                //q.push({ id: item['id'], url: ref_obj.url });
+                break;
+            }
           }
           //p.push(item);
         }
@@ -133,7 +144,7 @@ exports.profile_manifests = {
             date = new Date().toISOString().split('T')[0];
           }
 
-          item['id'] = 'CraftBukkit {0} ({1})'.format(mc_version, date);
+          item['id'] = 'CraftBukkit-{0}-({1})'.format(mc_version, date);
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'craftbukkit';
@@ -151,75 +162,50 @@ exports.profile_manifests = {
         console.log(e);
       }
 
-      p.sort(function(a, b) {
-        var itemA = JSON.parse(JSON.stringify(a));
-        var itemB = JSON.parse(JSON.stringify(b));
-
-        return b['releaseTime'] - a['releaseTime'];
-      });
-
       callback(null, p);
+    },
+    postdownload: function (profile_dir, dest_filepath, callback) {
+      callback();
     } //end handler
   },
-  paperspigot: {
-    name: 'PaperSpigot',
+  paperspigot114: {
+    name: 'PaperSpigot-1.14',
     request_args: {
-      url: 'https://mcmirror.io/api/list/paper',
+      url: 'https://papermc.io/ci/job/Paper-1.14/api/json',
       json: true
     },
     handler: function(profile_dir, body, callback) {
-      var p = [];
+      var p = []
 
-      try {
-        for (var index in body) {
-          var filename = body[index];
+      for(var index in body.builds)
+      {
+        var paperbuild = body.builds[index];
+        var buildNumber = paperbuild["number"];
 
-          var item = new profile_template();
-          var mc_version = filename.split('-')[1];
+        var url = "https://papermc.io/ci/job/Paper-1.14/{0}/artifact/paperclip-{0}.jar".format(buildNumber).trim();
+  
+        var item = new profile_template();
 
-          item['time'] = new Date().getTime();
+        item['id'] = 'PaperSpigot-{0}'.format(buildNumber).trim();
+        item['time'] = new Date().getTime();
+        item['releaseTime'] = new Date().getTime();
+        item['type'] = 'release';
+        item['group'] = 'PaperSpigot';
+        item['webui_desc'] = "PaperSpigot for Minecraft 1.14.X";
+        item['weight'] = 0;
+        item['filename'] = 'paperclip-{0}.jar'.format(buildNumber);
+        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
+        item['version'] = buildNumber;
+        item['release_version'] = '';
+        item['url'] = url;
 
-          var date = '';
-
-          try {
-            var dateTimeSplit = filename.split('-')[3];
-            var years = dateTimeSplit.substr(0, 4);
-            var mounth = dateTimeSplit.substr(4, 2);
-            var day = dateTimeSplit.substr(6, 7);
-
-            date = '' + years + '-' + mounth + '-' + day + '';
-
-          } catch (e) {
-            date = new Date().toISOString().split('T')[0];
-          }
-
-          item['id'] = 'PaperSpigot {0} ({1})'.format(mc_version, date);
-
-          item['releaseTime'] = new Date(date).getTime();
-          item['type'] = 'release';
-          item['group'] = 'paper';
-          item['webui_desc'] = 'PaperSpigot for Minecraft: {0}'.format(mc_version);
-          item['weight'] = 5;
-          item['filename'] = filename;
-          item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));;
-          item['version'] = 1.0;
-          item['release_version'] = mc_version;
-          item['url'] = 'https://mcmirror.io/files/Paper/{0}'.format(filename);
-          p.push(item);
-        }
-
-      } catch (e) {
-        console.log(e);
+        p.push(JSON.parse(JSON.stringify(item)));
       }
 
-      p.sort(function(a, b) {
-        var itemA = JSON.parse(JSON.stringify(a));
-        var itemB = JSON.parse(JSON.stringify(b));
-
-        return b['releaseTime'] - a['releaseTime'];
-      });
-
       callback(null, p);
+    },
+    postdownload: function (profile_dir, dest_filepath, callback) {
+      callback();
     } //end handler
   },
   spigot: {
@@ -254,7 +240,7 @@ exports.profile_manifests = {
             date = new Date().toISOString().split('T')[0];
           }
 
-          item['id'] = 'Spigot {0} ({1})'.format(mc_version, date);
+          item['id'] = 'Spigot-{0}-({1})'.format(mc_version, date);
           item['releaseTime'] = new Date(date).getTime();
           item['type'] = 'release';
           item['group'] = 'spigot';
@@ -271,14 +257,10 @@ exports.profile_manifests = {
         console.log(e);
       }
 
-      p.sort(function(a, b) {
-        var itemA = JSON.parse(JSON.stringify(a));
-        var itemB = JSON.parse(JSON.stringify(b));
-
-        return b['releaseTime'] - a['releaseTime'];
-      });
-
       callback(null, p);
+    },
+    postdownload: function (profile_dir, dest_filepath, callback) {
+      callback();
     } //end handler
   },
   bungeecord: {
@@ -321,103 +303,9 @@ exports.profile_manifests = {
       }
 
       callback(null, p);
-    } //end handler
-  },
-  spongevanilla: {
-    name: 'SpongeVanilla',
-    request_args: {
-      url: 'https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/maven-metadata.xml',
-      json: false,
-      gzip: true
     },
-    handler: function(profile_dir, body, callback) {
-      var p = [];
-
-      try {
-        var xml_parser = require('xml2js');
-
-        xml_parser.parseString(body, function(inner_err, result) {
-          try {
-            var packs = result['metadata']['versioning'][0]['versions'][0]['version'];
-
-            for (var index in packs) {
-              var item = new profile_template();
-              var matches = packs[index].match(/([\d\.]+)-([\d\.]+)?-?(\D+)-(\d+)/);
-
-              item['version'] = packs[index];
-              item['group'] = 'spongevanilla';
-
-              switch (matches[3]) {
-                case 'DEV':
-                  item['type'] = 'snapshot';
-                  break;
-                case 'BETA':
-                  item['type'] = 'release';
-                  break;
-                default:
-                  item['type'] = 'old_versions';
-                  break;
-              }
-
-              item['id'] = 'SpongeVanilla-{0}{1}{2}'.format(matches[1], matches[3][0].toLowerCase(), matches[4]);
-              item['webui_desc'] = 'Version {0}, build {1} (mc: {2})'.format(matches[2], matches[4], matches[1]);
-              item['weight'] = 5;
-              item['filename'] = 'spongevanilla-{0}.jar'.format(item.version);
-              item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-              item['url'] = 'https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/{0}/spongevanilla-{0}.jar'.format(item.version);
-              p.push(item);
-            }
-            callback(inner_err, p);
-          } catch (e) {}
-        })
-
-      } catch (e) {}
-
-      callback(null, p);
+    postdownload: function (profile_dir, dest_filepath, callback) {
+      callback();
     } //end handler
-  },
-  nukkit: {
-    name: 'Nukkit',
-    handler: function(profile_dir, callback) {
-      var p = [];
-
-      try {
-        var item = {};
-
-        item['id'] = 'nukkit-stable';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'release';
-        item['group'] = 'nukkit';
-        item['webui_desc'] = 'Minecraft: PE server for Java (stable)';
-        item['weight'] = 0;
-        item['filename'] = 'nukkit-1.0-SNAPSHOT.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = 0;
-        item['release_version'] = '';
-        item['url'] = 'http://ci.mengcraft.com:8080/job/nukkit/lastStableBuild/artifact/target/nukkit-1.0-SNAPSHOT.jar';
-
-        p.push(item);
-
-        var item = {};
-
-        item['id'] = 'nukkit-snapshot';
-        item['time'] = new Date().getTime();
-        item['releaseTime'] = new Date().getTime();
-        item['type'] = 'snapshot';
-        item['group'] = 'nukkit';
-        item['webui_desc'] = 'Minecraft: PE server for Java (last successful)';
-        item['weight'] = 0;
-        item['filename'] = 'nukkit-1.0-SNAPSHOT.jar';
-        item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-        item['version'] = 0;
-        item['release_version'] = '';
-        item['url'] = 'http://ci.mengcraft.com:8080/job/nukkit/lastSuccessfulBuild/artifact/target/nukkit-1.0-SNAPSHOT.jar';
-
-        p.push(item);
-      } catch (e) {}
-
-      callback(null, p);
-    } //end handler
-  },
+  }
 };

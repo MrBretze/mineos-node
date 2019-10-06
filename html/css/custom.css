@@ -6,7 +6,7 @@
  *
  */
 
-table tbody tr a, .pointer {
+ table tbody tr a, .pointer {
     cursor: pointer;
 }
 

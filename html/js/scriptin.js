@@ -409,6 +409,7 @@ app.controller("Webui", ['$scope', 'socket', 'Servers', '$filter', '$translate',
 
   socket.on('/', 'host_heartbeat', function(data) {
     $scope.host_heartbeat = data;
+    //console.log(data);
     $scope.update_loadavg(data.loadavg);
   })
 
@@ -418,8 +419,6 @@ app.controller("Webui", ['$scope', 'socket', 'Servers', '$filter', '$translate',
     for (var p in profile_data)
       if (profile_data[p].id == 'BuildTools-latest')
         $scope.buildtools_jar = profile_data[p];
-      else if (profile_data[p].id == 'PaperTools-latest')
-        $scope.papertools_jar = profile_data[p];
   })
 
   socket.on('/', 'user_list', function(user_data) {

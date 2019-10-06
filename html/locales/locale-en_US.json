@@ -35,6 +35,7 @@
   "PLAYERS_ONLINE": "Players Online",
   "UPTIME": "Uptime",
   "RAM_FREE": "RAM FREE",
+  "CPU_USAGE": "CPU USAGE (%)",
 
   "LOAD_AVERAGES": "Load Averages",
   "SERVER": "Server",

@@ -795,11 +795,13 @@ mineos.mc = function(server_name, base_dir) {
       function(owner, cb) {
         params['uid'] = owner['uid'];
         params['gid'] = owner['gid'];
+        console.log("Params = " + JSON.stringify(params));
         cb();
       },
       async.apply(self.get_start_args),
       function(start_args, cb) {
         args = start_args;
+        console.log("Args = " + start_args);
         cb();
       },
       async.apply(self.sc),
@@ -808,7 +810,7 @@ mineos.mc = function(server_name, base_dir) {
           self.profile_delta(sc_data.minecraft.profile, function(err, changed_files) {
             if (err) {
               if (err == 23) //source dir of profile non-existent
-                cb(); //ignore issue; profile non-essential to start (server_jar is req'd only)
+                cb(); //ignore issue; profile non-essential to start (server_jar is read only)
               else
                 cb(err);
             } else if (changed_files)
@@ -823,12 +825,18 @@ mineos.mc = function(server_name, base_dir) {
       async.apply(which, 'screen'),
       function(binary, cb) {
         var proc = child_process.spawn(binary, args, params);
+        proc.on('error', (error) => {
+          console.log("Error to start: " + error);
+          
+        });
         proc.once('close', cb);
       }
     ], function(err, result) {
       setTimeout(function() {
+        console.log("Error: " + err);
+        console.log("Result: " + result);
         callback(err, result);
-      }, 100)
+      }, 500)
     });
   }
 
@@ -913,7 +921,7 @@ mineos.mc = function(server_name, base_dir) {
   self.stuff = function(msg, callback) {
     var params = { cwd: self.env.cwd };
     var binary = which.sync('screen');
-
+    
     async.waterfall([
       async.apply(self.verify, 'exists'),
       async.apply(self.verify, 'up'),
@@ -927,7 +935,7 @@ mineos.mc = function(server_name, base_dir) {
       function(cb) {
         cb(null, child_process.spawn(binary, 
                                      ['-S', 'mc-{0}'.format(self.server_name),
-                                      '-p', '0', '-X', 'eval', 'stuff "{0}\012"'.format(msg)],
+                                      '-p', '0', '-X', 'eval', 'stuff "{0}\012"'.format(msg.trim())],
                                      params));
       }
     ], callback);
@@ -1583,6 +1591,8 @@ mineos.mc = function(server_name, base_dir) {
 
     function send_query_packet(port) {
       var net = require('net');
+      try {
+
       var socket = net.connect({port: port});
       var query = 'modern';
       var QUERIES = {
@@ -1642,6 +1652,7 @@ mineos.mc = function(server_name, base_dir) {
         console.error('error:', err);
         callback(err, null);
       })
+      } catch(e){}
     }
 
     self.sp(function(err, dict) {

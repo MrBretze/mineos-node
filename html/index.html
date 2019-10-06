@@ -2,7 +2,10 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" ng-app="mineos"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="mineos">
+<!--<![endif]-->
+
 <head>
     <!-- START META SECTION -->
     <meta charset="utf-8">
@@ -42,6 +45,7 @@
     <!--/ Javascript(Modernizr) -->
     <!--/ END JAVASCRIPT SECTION -->
 </head>
+
 <body ng-controller="Webui">
     <!-- START Template Wrapper -->
     <!-- If you want to enable the fixed sidebar or fixed header, just add `.fixed-sidebar` or `.fixed-header` class to the `#wrapper` div below -->
@@ -65,7 +69,7 @@
 
                 <!-- START Toolbar -->
                 <ul class="toolbar" id="toolbar" ng-controller="Toolbar">
-                    
+
                     <!-- START Notification -->
                     <li class="notification">
                         <a href="#" data-toggle="dropdown">
@@ -78,7 +82,8 @@
                                 <li ng-repeat="notice in all_notices() | orderBy:'-time_initiated' | limitTo: 10">
                                     <span class="icon icone-hdd"></span>
                                     <a href="#" class="text">
-                                        <strong>[{{ notice.server_name }}] {{ notice.command }}</strong> {{ notice.success ? 'success' : 'failed' }}<br>
+                                        <strong>[{{ notice.server_name }}] {{ notice.command }}</strong>
+                                        {{ notice.success ? 'success' : 'failed' }}<br>
                                         <small am-time-ago="notice.time_resolved"></small>
                                     </a>
                                     <span class="action"><a class="close" href="#">&times;</a></span>
@@ -98,11 +103,17 @@
                         <!-- START Dropdown Menu -->
                         <div class="dropdown-menu" role="menu">
                             <footer>
-                                <a href="https://github.com/hexparrot/mineos-node/commit/{{ git_commit }}">git commit: {{ git_commit }}</a><br>
-                                <a ng-click="host_command('refresh_server_list')" class="text pointer"><span class="icon icone-globe"></span> {{ 'REFRESH_SERVER_LIST' | translate }}</a><br>
-                                <a ng-click="host_command('refresh_profile_list', {redownload: true})" class="text pointer"><span class="icon icone-globe"></span> {{ 'REFRESH_PROFILE_LIST' | translate }}</a><br>
-                                <a ng-click="modals.open_locales()" class="text pointer"><span class="icon icone-globe"></span> {{ 'CHANGE_LOCALE' | translate }}</a><br>
-                                <a href="/logout" class="text"><span class="icon icone-off"></span> {{ 'LOGOFF' | translate }}</a>
+                                <a href="https://github.com/hexparrot/mineos-node/commit/{{ git_commit }}">git commit:
+                                    {{ git_commit }}</a><br>
+                                <a ng-click="host_command('refresh_server_list')" class="text pointer"><span
+                                        class="icon icone-globe"></span> {{ 'REFRESH_SERVER_LIST' | translate }}</a><br>
+                                <a ng-click="host_command('refresh_profile_list', {redownload: true})"
+                                    class="text pointer"><span class="icon icone-globe"></span>
+                                    {{ 'REFRESH_PROFILE_LIST' | translate }}</a><br>
+                                <a ng-click="modals.open_locales()" class="text pointer"><span
+                                        class="icon icone-globe"></span> {{ 'CHANGE_LOCALE' | translate }}</a><br>
+                                <a href="/logout" class="text"><span class="icon icone-off"></span>
+                                    {{ 'LOGOFF' | translate }}</a>
                             </footer>
                         </div>
                         <!--/ END Dropdown Menu -->
@@ -188,7 +199,8 @@
                                     <!--/ END Menu -->
 
                                     <!-- START Menu -->
-                                    <li class="accordion-group" ng-show="current && !servers[current].sc.minecraft.unconventional">
+                                    <li class="accordion-group"
+                                        ng-show="current && !servers[current].sc.minecraft.unconventional">
                                         <a ng-click="change_page('server_properties')">
                                             <span class="icon iconm-pencil-5"></span>
                                             <span class="text">server.properties</span>
@@ -241,7 +253,9 @@
                                     <!--/ END Menu Divider -->
 
                                     <!-- START Menu -->
-                                    <li class="accordion-group" ng-repeat="(logfile, throwaway) in servers[current].live_logs" ng-show="current">
+                                    <li class="accordion-group"
+                                        ng-repeat="(logfile, throwaway) in servers[current].live_logs"
+                                        ng-show="current">
                                         <a ng-click="change_page(logfile)">
                                             <span class="icon icone-desktop"></span>
                                             <span class="text nocaps">{{logfile}}</span>
@@ -250,7 +264,8 @@
                                     <!--/ END Menu -->
 
                                     <!-- START Menu -->
-                                    <li class="accordion-group" ng-show="current && servers[current].heartbeat.query.player_">
+                                    <li class="accordion-group"
+                                        ng-show="current && servers[current].heartbeat.query.player_">
                                         <a ng-click="change_page('player_interaction')">
                                             <span class="icon icone-group"></span>
                                             <span class="text" translate="PLAYER_INTERACTION"></span>
@@ -276,15 +291,17 @@
                     <div class="navbar-inner">
                         <!-- Breadcrumb -->
                         <ul class="breadcrumb">
-                            <li><a href="#" translate="CURRENTLY_SELECTED_SERVER"></a> <span class="divider"></span></li>
+                            <li><a href="#" translate="CURRENTLY_SELECTED_SERVER"></a> <span class="divider"></span>
+                            </li>
                             <li class="active">
                                 <!-- Select -->
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <select class="span2" ng-model="current" ng-options="name as name for (name, instance) in servers | membership">
-                                            </select>
-                                        </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <select class="span2" ng-model="current"
+                                            ng-options="name as name for (name, instance) in servers | membership">
+                                        </select>
                                     </div>
+                                </div>
                                 <!--/ Select -->
                             </li>
                         </ul>
@@ -326,25 +343,40 @@
                                         <figcaption>
                                             <h3>{{ servers_up() }}<small translate="SERVERS_RUNNING"></small></h3>
                                         </figcaption>
-                                    </figure><!--/ END Summary -->
+                                    </figure>
+                                    <!--/ END Summary -->
 
                                     <!-- START Circular -->
                                     <figure class="stats summary stacked circular">
-                                        <div class="gauge gauge-red" data-percent="{{ players_online()/player_capacity()*100 }}">
+                                        <div class="gauge gauge-red"
+                                            data-percent="{{ players_online()/player_capacity()*100 }}">
                                             <span class="icon icone-exchange"></span>
                                         </div>
                                         <figcaption>
                                             <h4>{{ players_online() }}<small translate="PLAYERS_ONLINE"></small></h4>
                                         </figcaption>
-                                    </figure><!--/ END Circular -->
-
+                                    </figure>
+                                    <!--/ END Circular -->
+                                    <!-- START Circular -->
+                                    <figure class="stats summary stacked circular">
+                                        <div class="gauge gauge-teal" 
+                                            data-percent="{{ host_heartbeat.cpuUsage }}">
+                                            <span class="icon icone-ticket"></span>
+                                        </div>
+                                        <figcaption>
+                                            <h4>{{ host_heartbeat.cpuUsage }}<small translate="CPU_USAGE"></small></h4>
+                                        </figcaption>
+                                    </figure>
+                                    <!--/ END Circular -->
                                     <!-- START Summary -->
                                     <figure class="stats summary stacked" ng-show="host_heartbeat.uptime">
                                         <div class="icon circle lime"><span class="icone-time"></span></div>
                                         <figcaption>
-                                            <h3>{{ host_heartbeat.uptime | seconds_to_time }}<small translate="UPTIME"></small></h3>
+                                            <h3>{{ host_heartbeat.uptime | seconds_to_time }}<small
+                                                    translate="UPTIME"></small></h3>
                                         </figcaption>
-                                    </figure><!--/ END Summary -->
+                                    </figure>
+                                    <!--/ END Summary -->
 
                                     <!-- START Circular -->
                                     <figure class="stats summary stacked circular" ng-show="host_heartbeat.freemem">
@@ -352,9 +384,12 @@
                                             <span class="icon icone-ticket"></span>
                                         </div>
                                         <figcaption>
-                                            <h4>{{ host_heartbeat.freemem | bytes_to_mb }}<small translate="RAM_FREE"></small></h4>
+                                            <h4>{{ host_heartbeat.freemem | bytes_to_mb }}<small
+                                                    translate="RAM_FREE"></small></h4>
                                         </figcaption>
-                                    </figure><!--/ END Circular -->
+                                    </figure>
+                                    <!--/ END Circular -->
+
                                 </div>
                             </section>
                         </div>
@@ -372,15 +407,15 @@
                             <section class="body">
                                 <div class="body-inner">
 
-                                        <!-- START Auto Update Chart -->
-                                        <div class="span12 widget">
-                                            <section class="body">
-                                                <div class="body-inner">
-                                                    <div class="flot" id="load_averages"></div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                        <!--/ END Auto Update Chart -->
+                                    <!-- START Auto Update Chart -->
+                                    <div class="span12 widget">
+                                        <section class="body">
+                                            <div class="body-inner">
+                                                <div class="flot" id="load_averages"></div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <!--/ END Auto Update Chart -->
 
                                 </div>
                             </section>
@@ -408,12 +443,20 @@
                                         <tbody>
                                             <tr ng-repeat="(server_name, instance) in servers" ng-show="!!instance.sp">
                                                 <td>
-                                                    <img ng-show="instance.icon.length" style="width:32px;height:32px;" ng-attr-src="{{ 'data:image/png;base64, ' + instance.icon }}" />
-                                                    <a ng-click="$parent.change_page('server_status', server_name)">{{ server_name }}</a>
+                                                    <img ng-show="instance.icon.length" style="width:32px;height:32px;"
+                                                        ng-attr-src="{{ 'data:image/png;base64, ' + instance.icon }}" />
+                                                    <a
+                                                        ng-click="$parent.change_page('server_status', server_name)">{{ server_name }}</a>
                                                 </td>
-                                                <td><a ng-attr-title="{{ 'MC Protocol: ' + instance.heartbeat.ping.protocol }}">{{ instance.sc.minecraft.profile }}</a></td>
-                                                <td class="hidden-phone">{{ (instance.sc.minecraft.unconventional ? '-----' : instance.sp['server-port']) }}</td>
-                                                <td><span class="label" ng-show="instance.heartbeat" ng-class="{'label-success': instance.heartbeat.up, 'label-important': !instance.heartbeat.up}">{{ instance.heartbeat.up ? 'up' : 'down' }}</span></td>
+                                                <td><a
+                                                        ng-attr-title="{{ 'MC Protocol: ' + instance.heartbeat.ping.protocol }}">{{ instance.sc.minecraft.profile }}</a>
+                                                </td>
+                                                <td class="hidden-phone">
+                                                    {{ (instance.sc.minecraft.unconventional ? '-----' : instance.sp['server-port']) }}
+                                                </td>
+                                                <td><span class="label" ng-show="instance.heartbeat"
+                                                        ng-class="{'label-success': instance.heartbeat.up, 'label-important': !instance.heartbeat.up}">{{ instance.heartbeat.up ? 'up' : 'down' }}</span>
+                                                </td>
                                                 <td>{{ instance.heartbeat.memory.VmRSS | kb_string_to_mb }}</td>
                                             </tr>
                                         </tbody>
@@ -431,7 +474,7 @@
                 <div class="container-fluid" ng-show="page == 'create_server'">
 
                     <!-- START General Elements -->
-                        
+
                     <header>
                         <h4 class="title"> {{ 'CREATE_NEW_SERVER' | translate }}</h4>
                     </header>
@@ -444,61 +487,75 @@
                                     <div class="controls">
                                         <div class="row-fluid">
                                             <div class="span4">
-                                                <input type="text" ng-model="serverform.server_name"><span class="help-block" translate="CREATE_HELP"></span>
+                                                <input type="text" ng-model="serverform.server_name"><span
+                                                    class="help-block" translate="CREATE_HELP"></span>
                                             </div>
                                         </div>
                                     </div>
-                                </div><!--/ Help Text -->
+                                </div>
+                                <!--/ Help Text -->
 
                                 <!-- Default Checkbox -->
-                                    <div class="control-group">
+                                <div class="control-group">
                                     <label class="control-label"></label>
                                     <div class="controls">
                                         <label class="checkbox">
-                                            <input type="checkbox" class="nostyle" value="true" ng-model="unconventional"> {{ 'UNCONVENTIONAL_SERVER_TYPE' | translate}}
+                                            <input type="checkbox" class="nostyle" value="true"
+                                                ng-model="unconventional"> {{ 'UNCONVENTIONAL_SERVER_TYPE' | translate}}
                                         </label>
                                     </div>
-                                </div><!--/ Default Checkbox -->
+                                </div>
+                                <!--/ Default Checkbox -->
 
                                 <!-- Input Text Placeholder -->
                                 <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">server-port</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="25565" class="span2" ng-model="serverform.server_port">
+                                        <input type="text" placeholder="25565" class="span2"
+                                            ng-model="serverform.server_port">
                                     </div>
-                                </div><!--/ Input Text Placeholder -->
+                                </div>
+                                <!--/ Input Text Placeholder -->
 
                                 <!-- Input Text Placeholder -->
                                 <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">server-ip</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="0.0.0.0" class="span2" ng-model="serverform.server_ip">
+                                        <input type="text" placeholder="0.0.0.0" class="span2"
+                                            ng-model="serverform.server_ip">
                                     </div>
-                                </div><!--/ Input Text Placeholder -->
+                                </div>
+                                <!--/ Input Text Placeholder -->
 
                                 <!-- Input Text Placeholder -->
                                 <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">max-players</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="20" class="span2" ng-model="serverform.max_players">
+                                        <input type="text" placeholder="20" class="span2"
+                                            ng-model="serverform.max_players">
                                     </div>
-                                </div><!--/ Input Text Placeholder -->
+                                </div>
+                                <!--/ Input Text Placeholder -->
 
                                 <!-- Input Text Placeholder -->
                                 <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">level-name</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="world" class="span2" ng-model="serverform.level_name">
+                                        <input type="text" placeholder="world" class="span2"
+                                            ng-model="serverform.level_name">
                                     </div>
-                                </div><!--/ Input Text Placeholder -->
+                                </div>
+                                <!--/ Input Text Placeholder -->
 
                                 <!-- Input Text Placeholder -->
                                 <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">level-seed</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="" class="span2" ng-model="serverform.level_seed">
+                                        <input type="text" placeholder="" class="span2"
+                                            ng-model="serverform.level_seed">
                                     </div>
-                                </div><!--/ Input Text Placeholder -->
+                                </div>
+                                <!--/ Input Text Placeholder -->
 
                                 <!-- Select -->
                                 <div class="control-group" ng-hide="unconventional">
@@ -511,7 +568,8 @@
                                             <option value="3">Hard</option>
                                         </select>
                                     </div>
-                                </div><!--/ Select -->
+                                </div>
+                                <!--/ Select -->
 
                                 <!-- Select -->
                                 <div class="control-group" ng-hide="unconventional">
@@ -523,40 +581,49 @@
                                             <option value="2">Adventure</option>
                                         </select>
                                     </div>
-                                </div><!--/ Select -->
+                                </div>
+                                <!--/ Select -->
 
                                 <!-- Select -->
                                 <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">level-type</label>
                                     <div class="controls">
-                                        <input type="text" placeholder="DEFAULT" class="span2" ng-model="serverform.level_type">
+                                        <input type="text" placeholder="DEFAULT" class="span2"
+                                            ng-model="serverform.level_type">
                                     </div>
-                                </div><!--/ Select -->
+                                </div>
+                                <!--/ Select -->
 
                                 <!-- Default Checkbox -->
-                                    <div class="control-group" ng-hide="unconventional">
+                                <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">enable-query</label>
                                     <div class="controls">
                                         <label class="checkbox">
-                                            <input type="checkbox" class="nostyle" value="true" ng-model="serverform.enable_query"> 
+                                            <input type="checkbox" class="nostyle" value="true"
+                                                ng-model="serverform.enable_query">
                                         </label>
                                     </div>
-                                </div><!--/ Default Checkbox -->
+                                </div>
+                                <!--/ Default Checkbox -->
 
                                 <!-- Default Checkbox -->
-                                    <div class="control-group" ng-hide="unconventional">
+                                <div class="control-group" ng-hide="unconventional">
                                     <label class="control-label">generate-structures</label>
                                     <div class="controls">
                                         <label class="checkbox">
-                                            <input type="checkbox" class="nostyle" value="true" ng-model="serverform.generate_structures" ng-init="serverform.generate_structures=true"> 
+                                            <input type="checkbox" class="nostyle" value="true"
+                                                ng-model="serverform.generate_structures"
+                                                ng-init="serverform.generate_structures=true">
                                         </label>
                                     </div>
-                                </div><!--/ Default Checkbox -->
+                                </div>
+                                <!--/ Default Checkbox -->
 
                                 <!-- START Button Sizing -->
                                 <div class="control-group">
                                     <p>
-                                        <button type="submit" class="btn btn-primary" ng-click="create_server()" translate="CREATE_NEW_SERVER"></button>
+                                        <button type="submit" class="btn btn-primary" ng-click="create_server()"
+                                            translate="CREATE_NEW_SERVER"></button>
                                     </p>
                                 </div>
                                 <!--/ END Button Default -->
@@ -564,8 +631,8 @@
                             </div>
                         </form>
                     </section>
-                
-                <!--/ END General Elements -->
+
+                    <!--/ END General Elements -->
                 </div>
                 <!--/ END Content -->
 
@@ -591,13 +658,16 @@
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="archive in archive_list">
-                                                <td>{{ archive.time | amDateFormat: "dddd, MMMM Do YYYY, h:mm:ss a"  }}</td>
+                                                <td>{{ archive.time | amDateFormat: "dddd, MMMM Do YYYY, h:mm:ss a"  }}
+                                                </td>
                                                 <td>{{ archive.size | bytes_to_mb }}</td>
                                                 <td>{{ archive.filename }}</td>
                                                 <td>
                                                     <p>
                                                         <div class="btn-group">
-                                                            <button class="btn btn-small btn-primary" ng-click="server_from_archive(archive.filename, null)">{{ 'CREATE_FROM_ARCHIVE' | translate }} </button>
+                                                            <button class="btn btn-small btn-primary"
+                                                                ng-click="server_from_archive(archive.filename, null)">{{ 'CREATE_FROM_ARCHIVE' | translate }}
+                                                            </button>
                                                         </div>
                                                     </p>
                                                 </td>
@@ -621,7 +691,7 @@
                         <!-- START Basic Table -->
                         <div class="span12 widget">
                             <header>
-                                <h4 class="title" translate="AVAILABLE_SERVER_JARS"></h4> 
+                                <h4 class="title" translate="AVAILABLE_SERVER_JARS"></h4>
                                 <div class="alert alert-error" ng-if="!profiles.length">
                                     <strong translate="NO_PROFILES_DOWNLOADED"></strong>
                                 </div>
@@ -640,10 +710,9 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <select class="span12"
-                                                      style="text-transform:capitalize;"
-                                                      ng-options="v as v for (k,v) in unique_profile_groups()"
-                                                      ng-model="serverprofiles.group">
+                                                    <select class="span12" style="text-transform:capitalize;"
+                                                        ng-options="v as v for (k,v) in unique_profile_groups()"
+                                                        ng-model="serverprofiles.group">
                                                     </select>
                                                 </td>
                                                 <td></td>
@@ -668,13 +737,18 @@
                                                            profile_filter: {field: 'group', value: serverprofiles.group} | 
                                                            profile_filter: {field: 'type', value: serverprofiles.type} | 
                                                            profile_downloaded: serverprofiles.downloaded | 
-                                                           orderBy:['+weight', '-releaseTime', 'id']">
+                                                           orderBy:[+version, '-releaseTime', '+weight']">
                                                 <td>{{ jar.id }}</td>
                                                 <td>{{ jar.webui_desc }}</td>
                                                 <td>[{{ jar.group }}] <strong>{{ jar.type }}</strong></td>
                                                 <td>
                                                     <p>
-                                                        <button type="button" class="btn btn-mini btn-success" ng-click="host_command('download', {profile: jar})" translate="DOWNLOAD"></button> <span ng-show="jar.progress.percent > 0 && jar.progress.percent < 100">{{ jar.progress.percent + '%' }}</span> <span ng-show="jar.downloaded" class="icone-ok">{{ 'DOWNLOADED' | translate }}</span>
+                                                        <button type="button" class="btn btn-mini btn-success"
+                                                            ng-click="host_command('download', {profile: jar})"
+                                                            translate="DOWNLOAD"></button> <span
+                                                            ng-show="jar.progress.percent > 0 && jar.progress.percent < 100">{{ jar.progress.percent + '%' }}</span>
+                                                        <span ng-show="jar.downloaded"
+                                                            class="icone-ok">{{ 'DOWNLOADED' | translate }}</span>
                                                     </p>
                                                 </td>
                                             </tr>
@@ -698,18 +772,20 @@
                         <!-- START Basic Table -->
                         <div class="span12 widget">
                             <header>
-                                <h4 class="title" translate="BUILDTOOLS"></h4> 
+                                <h4 class="title" translate="BUILDTOOLS"></h4>
                             </header>
                             <section class="body">
                                 <div class="body-inner no-padding">
                                     <p translate="BUILDTOOLS_INSTRUCTIONS"></p>
-                                    
-                                    
+
+
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th translate="IDENTIFIER" class="span4"></th>
-                                                <th>Spigot <br><button type="button" class="btn btn-mini btn-success" ng-click="host_command('download', {profile: buildtools_jar})" translate="DOWNLOAD_BUILDTOOLS"></button></th>
+                                                <th>Spigot <br><button type="button" class="btn btn-mini btn-success"
+                                                        ng-click="host_command('download', {profile: buildtools_jar})"
+                                                        translate="DOWNLOAD_BUILDTOOLS"></button></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -720,9 +796,18 @@
                                                            orderBy:['+weight', '-releaseTime', 'id']">
                                                 <td>{{ jar.id }}</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-mini btn-success" ng-click="host_command('build_jar', {builder: buildtools_jar, version: jar.id})" ng-disabled="!buildtools_jar.downloaded" translate="BUILD_SPIGOT"></button>
-                                                    <button type="button" class="btn btn-mini btn-danger" ng-click="host_command('delete_build', {version: jar.id, type: 'spigot'})" ng-show="spigot_list['spigot_' + jar.id].jarfiles.length" translate="DELETE"></button>
-                                                    <button type="button" class="btn btn-mini btn-primary" ng-click="modals.open_copy_to_server(jar.id, 'spigot')" ng-show="spigot_list['spigot_' + jar.id].jarfiles.length" translate="COPY_TO_SERVER"></button>
+                                                    <button type="button" class="btn btn-mini btn-success"
+                                                        ng-click="host_command('build_jar', {builder: buildtools_jar, version: jar.id})"
+                                                        ng-disabled="!buildtools_jar.downloaded"
+                                                        translate="BUILD_SPIGOT"></button>
+                                                    <button type="button" class="btn btn-mini btn-danger"
+                                                        ng-click="host_command('delete_build', {version: jar.id, type: 'spigot'})"
+                                                        ng-show="spigot_list['spigot_' + jar.id].jarfiles.length"
+                                                        translate="DELETE"></button>
+                                                    <button type="button" class="btn btn-mini btn-primary"
+                                                        ng-click="modals.open_copy_to_server(jar.id, 'spigot')"
+                                                        ng-show="spigot_list['spigot_' + jar.id].jarfiles.length"
+                                                        translate="COPY_TO_SERVER"></button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -783,47 +868,66 @@
                                                 <div class="body-inner no-padding" style="">
                                                     <!-- START Summary -->
                                                     <figure class="stats summary stacked">
-                                                        <div class="icon circle" ng-class="{green: servers[current].heartbeat.up, red: servers[current].heartbeat.up == false}"><span class="icone-ok"></span></div>
+                                                        <div class="icon circle"
+                                                            ng-class="{green: servers[current].heartbeat.up, red: servers[current].heartbeat.up == false}">
+                                                            <span class="icone-ok"></span></div>
                                                         <figcaption>
-                                                            <h4>{{ servers[current].heartbeat.up ? 'UP' : 'DOWN' }}<small translate="SERVER_STATUS"></small></h4>
+                                                            <h4>{{ servers[current].heartbeat.up ? 'UP' : 'DOWN' }}<small
+                                                                    translate="SERVER_STATUS"></small></h4>
                                                         </figcaption>
-                                                    </figure><!--/ END Summary -->
+                                                    </figure>
+                                                    <!--/ END Summary -->
 
                                                     <!-- START Circular -->
-                                                    <figure class="stats summary stacked circular" ng-hide="servers[current].sc.minecraft.unconventional">
-                                                        <div id="capacity_gauge" class="gauge gauge-red" data-percent="0">
+                                                    <figure class="stats summary stacked circular"
+                                                        ng-hide="servers[current].sc.minecraft.unconventional">
+                                                        <div id="capacity_gauge" class="gauge gauge-red"
+                                                            data-percent="0">
                                                             <span class="icon icone-exchange"></span>
                                                         </div>
                                                         <figcaption>
-                                                            <h4>{{ servers[current].heartbeat.ping.players_online ? servers[current].heartbeat.ping.players_online : 0 }} / {{ servers[current].sp['max-players'] }}<small translate="PLAYERS_ONLINE"></small></h4>
+                                                            <h4>{{ servers[current].heartbeat.ping.players_online ? servers[current].heartbeat.ping.players_online : 0 }}
+                                                                / {{ servers[current].sp['max-players'] }}<small
+                                                                    translate="PLAYERS_ONLINE"></small></h4>
                                                         </figcaption>
-                                                    </figure><!--/ END Circular -->
+                                                    </figure>
+                                                    <!--/ END Circular -->
 
                                                     <!-- START Summary -->
                                                     <figure class="stats summary stacked">
-                                                        <div class="icon circle blue"><span class="icone-cogs"></span></div>
+                                                        <div class="icon circle blue"><span class="icone-cogs"></span>
+                                                        </div>
                                                         <figcaption>
-                                                            <h4>{{ servers[current].sc.minecraft.profile }}&nbsp;<small translate="PROFILE"></small></h4>
+                                                            <h4>{{ servers[current].sc.minecraft.profile }}&nbsp;<small
+                                                                    translate="PROFILE"></small></h4>
                                                         </figcaption>
-                                                    </figure><!--/ END Summary -->
+                                                    </figure>
+                                                    <!--/ END Summary -->
 
                                                     <!-- START Summary -->
-                                                    <figure class="stats summary stacked" ng-hide="servers[current].sc.minecraft.unconventional">
-                                                        <div class="icon circle blue"><span class="icone-cogs"></span></div>
+                                                    <figure class="stats summary stacked"
+                                                        ng-hide="servers[current].sc.minecraft.unconventional">
+                                                        <div class="icon circle blue"><span class="icone-cogs"></span>
+                                                        </div>
                                                         <figcaption>
-                                                            <h4>{{ servers[current].heartbeat.ping.server_version }}&nbsp;<small translate="REPORTED_VERSION"></small></h4>
+                                                            <h4>{{ servers[current].heartbeat.ping.server_version }}&nbsp;<small
+                                                                    translate="REPORTED_VERSION"></small></h4>
                                                         </figcaption>
-                                                    </figure><!--/ END Summary -->
+                                                    </figure>
+                                                    <!--/ END Summary -->
 
                                                     <!-- START Circular -->
                                                     <figure class="stats summary stacked circular">
-                                                        <div id="memory_gauge" class="gauge gauge-teal" data-percent="0">
+                                                        <div id="memory_gauge" class="gauge gauge-teal"
+                                                            data-percent="0">
                                                             <span class="icon icone-ticket"></span>
                                                         </div>
                                                         <figcaption>
-                                                            <h4>{{ servers[current].heartbeat.memory.VmRSS | kb_string_to_mb }}&nbsp;<small translate="MEMORY_FOOTPRINT"></small></h4>
+                                                            <h4>{{ servers[current].heartbeat.memory.VmRSS | kb_string_to_mb }}&nbsp;<small
+                                                                    translate="MEMORY_FOOTPRINT"></small></h4>
                                                         </figcaption>
-                                                    </figure><!--/ END Circular -->
+                                                    </figure>
+                                                    <!--/ END Circular -->
                                                 </div>
                                             </section>
                                         </div>
@@ -835,105 +939,141 @@
                                     <div class="row-fluid">
                                         <!-- START Button Default -->
                                         <div class="span6 widget">
-                                            <header><h4 class="title"><span class="icon icone-home"></span>{{ 'SERVER_ACTIONS' | translate }}</h4></header>
+                                            <header>
+                                                <h4 class="title"><span
+                                                        class="icon icone-home"></span>{{ 'SERVER_ACTIONS' | translate }}
+                                                </h4>
+                                            </header>
                                             <section class="body">
                                                 <div class="body-inner">
 
                                                     <div class="span4">
-                                                        <button type="button" class="btn btn-success span12" ng-disabled="servers[current].heartbeat.up || !valid_server_name(current)" ng-click="server_command('start')" translate="START" ng-show="(servers[current].sc.java.jarfile && servers[current].sc.java.java_xmx)"></button>
-                                                        <button type="button" class="btn btn-success span12" ng-disabled="servers[current].heartbeat.up || !valid_server_name(current)" ng-click="modals.open_new_server()" translate="START" ng-show="!(servers[current].sc.java.jarfile && servers[current].sc.java.java_xmx)"></button>
+                                                        <button type="button" class="btn btn-success span12"
+                                                            ng-disabled="servers[current].heartbeat.up || !valid_server_name(current)"
+                                                            ng-click="server_command('start')" translate="START"
+                                                            ng-show="(servers[current].sc.java.jarfile && servers[current].sc.java.java_xmx)"></button>
+                                                        <button type="button" class="btn btn-success span12"
+                                                            ng-disabled="servers[current].heartbeat.up || !valid_server_name(current)"
+                                                            ng-click="modals.open_new_server()" translate="START"
+                                                            ng-show="!(servers[current].sc.java.jarfile && servers[current].sc.java.java_xmx)"></button>
                                                     </div>
 
                                                     <div class="span4">
                                                         <div class="btn-group btn-block">
                                                             <button class="btn btn-danger span6" translate="STOP"
-                                                                    ng-disabled="!servers[current].heartbeat.up" 
-                                                                    ng-click="server_command('stop')"
-                                                                    ng-hide="servers[current].sc.minecraft.unconventional"
-                                                                    ></button>
+                                                                ng-disabled="!servers[current].heartbeat.up"
+                                                                ng-click="server_command('stop')"
+                                                                ng-hide="servers[current].sc.minecraft.unconventional"></button>
                                                             <button class="btn btn-danger span6" translate="KILL"
-                                                                    ng-disabled="!servers[current].heartbeat.up" 
-                                                                    ng-click="server_command('kill')" 
-                                                                    ng-hide="!servers[current].sc.minecraft.unconventional"
-                                                                    ></button>
-                                                            <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                                                ng-disabled="!servers[current].heartbeat.up"
+                                                                ng-click="server_command('kill')"
+                                                                ng-hide="!servers[current].sc.minecraft.unconventional"></button>
+                                                            <button class="btn btn-danger dropdown-toggle"
+                                                                data-toggle="dropdown"><span
+                                                                    class="caret"></span></button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="#" translate="STOP"
-                                                                       ng-hide="extra_action('stop')"
-                                                                       ng-disabled="!servers[current].heartbeat.up"
-                                                                       ng-click="server_command('stop')"></a></li>
+                                                                        ng-hide="extra_action('stop')"
+                                                                        ng-disabled="!servers[current].heartbeat.up"
+                                                                        ng-click="server_command('stop')"></a></li>
                                                                 <li><a href="#" translate="STOP_AND_BACKUP"
-                                                                       ng-hide="extra_action('stop_and_backup')"
-                                                                       ng-click="server_command('stop_and_backup')"></a></li>
+                                                                        ng-hide="extra_action('stop_and_backup')"
+                                                                        ng-click="server_command('stop_and_backup')"></a>
+                                                                </li>
                                                                 <li><a href="#" translate="RESTART"
-                                                                       ng-hide="extra_action('restart')"
-                                                                       ng-click="server_command('restart')"></a></li>
+                                                                        ng-hide="extra_action('restart')"
+                                                                        ng-click="server_command('restart')"></a></li>
                                                                 <li><a href="#" translate="KILL"
-                                                                       ng-click="server_command('kill')"
-                                                                       ng-disabled="!servers[current].heartbeat.up"></a></li>
-                                                                <li><a><span class="monospace" translate="SERVER_ACTIONS"></span>:</a></li>
+                                                                        ng-click="server_command('kill')"
+                                                                        ng-disabled="!servers[current].heartbeat.up"></a>
+                                                                </li>
+                                                                <li><a><span class="monospace"
+                                                                            translate="SERVER_ACTIONS"></span>:</a></li>
                                                                 <li><a href="#" class="monospace"
-                                                                       ng-hide="extra_action('reload')"
-                                                                       ng-click="player_command('reload', '', '')">/reload</a></li>
+                                                                        ng-hide="extra_action('reload')"
+                                                                        ng-click="player_command('reload', '', '')">/reload</a>
+                                                                </li>
                                                                 <li><a href="#" class="monospace"
-                                                                       ng-hide="extra_action('save-all')"
-                                                                       ng-click="player_command('save-all', '', '')">/save-all</a></li>
+                                                                        ng-hide="extra_action('save-all')"
+                                                                        ng-click="player_command('save-all', '', '')">/save-all</a>
+                                                                </li>
                                                                 <li><a href="#" class="monospace"
-                                                                       ng-hide="extra_action('save-on')"
-                                                                       ng-click="player_command('save-on', '', '')">/save-on</a></li>
+                                                                        ng-hide="extra_action('save-on')"
+                                                                        ng-click="player_command('save-on', '', '')">/save-on</a>
+                                                                </li>
                                                                 <li><a href="#" class="monospace"
-                                                                       ng-hide="extra_action('save-off')"
-                                                                       ng-click="player_command('save-off', '', '')">/save-off</a></li>
+                                                                        ng-hide="extra_action('save-off')"
+                                                                        ng-click="player_command('save-off', '', '')">/save-off</a>
+                                                                </li>
                                                                 <li><a href="#" class="monospace"
-                                                                       ng-hide="extra_action('end')"
-                                                                       ng-click="player_command('end', '', '')">/end</a></li>
+                                                                        ng-hide="extra_action('end')"
+                                                                        ng-click="player_command('end', '', '')">/end</a>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
 
                                                     <div class="span4">
-                                                        <button type="button" class="btn pull-right" ng-click="modals.open_accept_eula()" translate="ACCEPT_EULA" ng-class="{'btn-default': servers[current].page_data.glance.eula != false, 'btn-primary': servers[current].page_data.glance.eula == false}" ng-hide="servers[current].sc.minecraft.unconventional"></button>
+                                                        <button type="button" class="btn pull-right"
+                                                            ng-click="modals.open_accept_eula()" translate="ACCEPT_EULA"
+                                                            ng-class="{'btn-default': servers[current].page_data.glance.eula != false, 'btn-primary': servers[current].page_data.glance.eula == false}"
+                                                            ng-hide="servers[current].sc.minecraft.unconventional"></button>
                                                     </div>
 
-                                                    <div class="clearfix"></div><div class="span12"></div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="span12"></div>
 
                                                     <!-- Select -->
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <select class="" 
-                                                                ng-model="myprofile" 
-                                                                data-ng-options="p as p.id group by p.group for p in profiles | 
+                                                            <select class="" ng-model="myprofile" data-ng-options="p as p.id group by p.group for p in profiles | 
                                                                 profile_downloaded: 'only_downloaded' | 
-                                                                orderBy:'-releaseTime'" 
+                                                                orderBy:'-releaseTime'"
                                                                 ng-change="change_sc('minecraft', 'profile', myprofile.id)">
-                                                                <option value="" selected translate="CHANGE_PROFILE_TO"></option>
+                                                                <option value="" selected translate="CHANGE_PROFILE_TO">
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <div class="controls">
-                                                            <button class="btn btn-default" ng-click="server_command('copy_profile')" translate="COPY_PROFILE"></button>
-                                                            <button class="btn btn-default" ng-click="server_command('run_installer')" ng-hide="!servers[current].page_data.glance.ftb_installer">FTBInstall.sh</button>
+                                                            <button class="btn btn-default"
+                                                                ng-click="server_command('copy_profile')"
+                                                                translate="COPY_PROFILE"></button>
+                                                            <button class="btn btn-default"
+                                                                ng-click="server_command('run_installer')"
+                                                                ng-hide="!servers[current].page_data.glance.ftb_installer">FTBInstall.sh</button>
                                                         </div>
-                                                    </div><!--/ Select -->
+                                                    </div>
+                                                    <!--/ Select -->
                                                     <label class="checkbox">
-                                                        <input id="broadcast" type="checkbox" ng-model="broadcast_to_lan" ng-change="change_sc('minecraft', 'broadcast', broadcast_to_lan || 'false')"> {{ 'BROADCAST_TO_LAN' | translate }}
+                                                        <input id="broadcast" type="checkbox"
+                                                            ng-model="broadcast_to_lan"
+                                                            ng-change="change_sc('minecraft', 'broadcast', broadcast_to_lan || 'false')">
+                                                        {{ 'BROADCAST_TO_LAN' | translate }}
                                                     </label>
                                                     <label class="checkbox">
-                                                        <input id="onrebootstart" type="checkbox" ng-model="onrebootstart" ng-change="change_sc('onreboot', 'start', onrebootstart || 'false')"> {{ 'START_ON_BOOT' | translate }}
+                                                        <input id="onrebootstart" type="checkbox"
+                                                            ng-model="onrebootstart"
+                                                            ng-change="change_sc('onreboot', 'start', onrebootstart || 'false')">
+                                                        {{ 'START_ON_BOOT' | translate }}
                                                     </label>
                                                     <label class="checkbox">
-                                                        <input id="unconventional"  type="checkbox" ng-model="unconventional_server" ng-change="change_sc('minecraft', 'unconventional', unconventional_server || 'false')"> {{ 'UNCONVENTIONAL_SERVER' | translate }}
+                                                        <input id="unconventional" type="checkbox"
+                                                            ng-model="unconventional_server"
+                                                            ng-change="change_sc('minecraft', 'unconventional', unconventional_server || 'false')">
+                                                        {{ 'UNCONVENTIONAL_SERVER' | translate }}
                                                     </label>
                                                     <div class="controls">
-                                                        <label class="control-label" translate="COMMIT_INTERVAL"></label>
+                                                        <label class="control-label"
+                                                            translate="COMMIT_INTERVAL"></label>
                                                         <div class="control-group">
-                                                            <input type="text" 
-                                                            class="span4"
-                                                            placeholder="60"
-                                                            ng-model="servers[current].sc.minecraft.commit_interval" 
-                                                            ng-change="change_sc('minecraft', 'commit_interval', servers[current].sc.minecraft.commit_interval)" 
-                                                            ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
+                                                            <input type="text" class="span4" placeholder="60"
+                                                                ng-model="servers[current].sc.minecraft.commit_interval"
+                                                                ng-change="change_sc('minecraft', 'commit_interval', servers[current].sc.minecraft.commit_interval)"
+                                                                ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
 
-                                                            <button type="button" class="btn span2 pull-left" ng-click="server_command('saveall_latest_log')" ng-show="current && servers[current].live_logs['logs/latest.log'].length">save-all</button>
+                                                            <button type="button" class="btn span2 pull-left"
+                                                                ng-click="server_command('saveall_latest_log')"
+                                                                ng-show="current && servers[current].live_logs['logs/latest.log'].length">save-all</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -944,35 +1084,47 @@
                                         <!-- START Button Default -->
                                         <div class="span6 widget">
                                             <header>
-                                                 <h4 class="title"><span class="icon icone-ticket"></span>{{ 'JAVA_SETTINGS' | translate }}</h4>
-                                                 <span class="badge pull-right" ng-click="modals.open_modal_niceness()" ng-class="{'badge-important': servers[current].niceness < 0, 'badge-success': servers[current].niceness == 0, 'badge-warning': servers[current].niceness > 0}">{{ servers[current].niceness }}</span>
+                                                <h4 class="title"><span
+                                                        class="icon icone-ticket"></span>{{ 'JAVA_SETTINGS' | translate }}
+                                                </h4>
+                                                <span class="badge pull-right" ng-click="modals.open_modal_niceness()"
+                                                    ng-class="{'badge-important': servers[current].niceness < 0, 'badge-success': servers[current].niceness == 0, 'badge-warning': servers[current].niceness > 0}">{{ servers[current].niceness }}</span>
                                             </header>
                                             <section class="body">
                                                 <div class="body-inner">
                                                     <!-- Select -->
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <select class="span6" ng-model="myjarfile" data-ng-options="j for j in servers[current].page_data.glance.server_files" ng-change="change_sc('java', 'jarfile', myjarfile)">
-                                                                <option value="" selected translate="CHANGE_JARFILE_TO"></option>
+                                                            <select class="span6" ng-model="myjarfile"
+                                                                data-ng-options="j for j in servers[current].page_data.glance.server_files"
+                                                                ng-change="change_sc('java', 'jarfile', myjarfile)">
+                                                                <option value="" selected translate="CHANGE_JARFILE_TO">
+                                                                </option>
                                                             </select>
                                                         </div>
-                                                    </div><!--/ Select -->
+                                                    </div>
+                                                    <!--/ Select -->
                                                     <!--/ Unconventional server console textbox -->
-                                                    <div class="controls" ng-show="servers[current].sc.minecraft.unconventional">
+                                                    <div class="controls"
+                                                        ng-show="servers[current].sc.minecraft.unconventional">
                                                         <label class="control-label" translate="CONSOLE"></label>
-                                                        <div class="controls console-input" ng-repeat="obj in user_input">
-                                                            <label>&gt;</label><input type="text" class="span6" ng-model="obj.text" ng-enter="console_input()">
+                                                        <div class="controls console-input"
+                                                            ng-repeat="obj in user_input">
+                                                            <label>&gt;</label><input type="text" class="span6"
+                                                                ng-model="obj.text" ng-enter="console_input()">
                                                         </div>
                                                     </div>
                                                     <!-- Help Text -->
-                                                    <div class="control-group" ng-hide="servers[current].sc.minecraft.unconventional">
-                                                        <label class="control-label" translate="MEMORY_ALLOCATION"></label>
+                                                    <div class="control-group"
+                                                        ng-hide="servers[current].sc.minecraft.unconventional">
+                                                        <label class="control-label"
+                                                            translate="MEMORY_ALLOCATION"></label>
                                                         <div class="controls">
                                                             <div class="input-prepend input-append">
                                                                 <span class="add-on" translate="JAVA_XMX"></span>
-                                                                <input type="text" 
-                                                                    ng-model="servers[current].sc.java.java_xmx" 
-                                                                    ng-change="change_sc('java', 'java_xmx', servers[current].sc.java.java_xmx)" 
+                                                                <input type="text"
+                                                                    ng-model="servers[current].sc.java.java_xmx"
+                                                                    ng-change="change_sc('java', 'java_xmx', servers[current].sc.java.java_xmx)"
                                                                     ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
                                                                 <span class="add-on" translate="MB_ABBREVIATION"></span>
                                                             </div>
@@ -980,8 +1132,8 @@
                                                         <div class="controls">
                                                             <div class="input-prepend input-append">
                                                                 <span class="add-on" translate="JAVA_XMS"></span>
-                                                                <input type="text" 
-                                                                    ng-model="servers[current].sc.java.java_xms" 
+                                                                <input type="text"
+                                                                    ng-model="servers[current].sc.java.java_xms"
                                                                     ng-change="change_sc('java', 'java_xms', servers[current].sc.java.java_xms)"
                                                                     ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
                                                                 <span class="add-on" translate="MB_ABBREVIATION"></span>
@@ -989,22 +1141,23 @@
                                                         </div>
                                                     </div>
                                                     <!--/ Help Text -->
-                                                    <div class="controls" ng-hide="servers[current].sc.minecraft.unconventional">
-                                                        <label class="control-label" translate="ADDITIONAL_JAVA_ARGS"></label>
-                                                        <input type="text" 
-                                                            class="span6"
+                                                    <div class="controls"
+                                                        ng-hide="servers[current].sc.minecraft.unconventional">
+                                                        <label class="control-label"
+                                                            translate="ADDITIONAL_JAVA_ARGS"></label>
+                                                        <input type="text" class="span6"
                                                             placeholder="-XX:+DisableExplicitGC"
-                                                            ng-model="servers[current].sc.java.java_tweaks" 
-                                                            ng-change="change_sc('java', 'java_tweaks', servers[current].sc.java.java_tweaks)" 
+                                                            ng-model="servers[current].sc.java.java_tweaks"
+                                                            ng-change="change_sc('java', 'java_tweaks', servers[current].sc.java.java_tweaks)"
                                                             ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
                                                     </div>
-                                                    <div class="controls" ng-hide="servers[current].sc.minecraft.unconventional">
-                                                        <label class="control-label" translate="ADDITIONAL_JAR_ARGS"></label>
-                                                        <input type="text" 
-                                                            class="span6"
-                                                            placeholder="nogui"
-                                                            ng-model="servers[current].sc.java.jar_args" 
-                                                            ng-change="change_sc('java', 'jar_args', servers[current].sc.java.jar_args)" 
+                                                    <div class="controls"
+                                                        ng-hide="servers[current].sc.minecraft.unconventional">
+                                                        <label class="control-label"
+                                                            translate="ADDITIONAL_JAR_ARGS"></label>
+                                                        <input type="text" class="span6" placeholder="nogui"
+                                                            ng-model="servers[current].sc.java.jar_args"
+                                                            ng-change="change_sc('java', 'jar_args', servers[current].sc.java.jar_args)"
                                                             ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
                                                     </div>
                                                 </div>
@@ -1019,31 +1172,54 @@
                                         <p>&nbsp;</p>
                                     </div>
                                     <!--/ END Row -->
-                                        
+
                                     <!-- START Row -->
                                     <div class="row-fluid">
                                         <!-- START Widget Header Badge -->
                                         <div class="span6 widget">
                                             <header>
-                                                <h4 class="title"><span class="icon icone-hdd"></span> {{ 'RESTORE_POINTS' | translate }}</h4>
-                                                <span class="badge badge-success pull-right" ng-click="change_page('restore_points')">{{ servers[current].page_data.glance.increments.length }}</span>
+                                                <h4 class="title"><span class="icon icone-hdd"></span>
+                                                    {{ 'RESTORE_POINTS' | translate }}</h4>
+                                                <span class="badge badge-success pull-right"
+                                                    ng-click="change_page('restore_points')">{{ servers[current].page_data.glance.increments.length }}</span>
                                             </header>
                                             <section class="body">
                                                 <div class="body-inner">
-                                                    <p>{{ 'MOST_RECENT_RESTORE_POINT' | translate }}: <a rel="tooltip" title="{{ servers[current].page_data.glance.increments[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}" am-time-ago="servers[current].page_data.glance.increments[0].time"></a></p>
-                                                    <p>{{ 'OLDEST_RESTORE_POINT' | translate }}: <a href="#" rel="tooltip" title="{{ servers[current].page_data.glance.increments.slice(-1)[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}" am-time-ago="servers[current].page_data.glance.increments.slice(-1)[0].time"></a></p>
-                                                    <p>{{ 'SPACE_USED_RESTORES' | translate }}: {{ servers[current].page_data.glance.du_bwd | bytes_to_mb }}</p>
+                                                    <p>{{ 'MOST_RECENT_RESTORE_POINT' | translate }}: <a rel="tooltip"
+                                                            title="{{ servers[current].page_data.glance.increments[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}"
+                                                            am-time-ago="servers[current].page_data.glance.increments[0].time"></a>
+                                                    </p>
+                                                    <p>{{ 'OLDEST_RESTORE_POINT' | translate }}: <a href="#"
+                                                            rel="tooltip"
+                                                            title="{{ servers[current].page_data.glance.increments.slice(-1)[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}"
+                                                            am-time-ago="servers[current].page_data.glance.increments.slice(-1)[0].time"></a>
+                                                    </p>
+                                                    <p>{{ 'SPACE_USED_RESTORES' | translate }}:
+                                                        {{ servers[current].page_data.glance.du_bwd | bytes_to_mb }}</p>
                                                     <!-- Alert Error -->
-                                                    <div class="alert alert-success" ng-show="servers[current].latest_notice['backup'].success">
-                                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                                        <strong>{{ 'SUCCESS' | translate }}! </strong> {{ 'RESTORE_POINT_CREATED' | translate }} <span am-time-ago="servers[current].latest_notice['backup'].time_resolved"></span>.
-                                                    </div><!--/ Alert Error -->
+                                                    <div class="alert alert-success"
+                                                        ng-show="servers[current].latest_notice['backup'].success">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="alert">×</button>
+                                                        <strong>{{ 'SUCCESS' | translate }}! </strong>
+                                                        {{ 'RESTORE_POINT_CREATED' | translate }} <span
+                                                            am-time-ago="servers[current].latest_notice['backup'].time_resolved"></span>.
+                                                    </div>
+                                                    <!--/ Alert Error -->
                                                     <!-- Alert Error -->
-                                                    <div class="alert alert-error" ng-show="servers[current].latest_notice['backup'].success == false">
-                                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                                        <strong>{{ 'FAILURE' | translate }}! </strong> {{ 'RESTORE_POINT_FAILED' | translate }} <span am-time-ago="servers[current].latest_notice['backup'].time_resolved"></span>.
-                                                    </div><!--/ Alert Error -->
-                                                    <p><button type="button" class="btn btn-small btn-primary" ng-click="server_command('backup')"><span class="icone-plus"></span> {{ 'CREATE_NEW_RESTORE_POINT' | translate }}</button></p>
+                                                    <div class="alert alert-error"
+                                                        ng-show="servers[current].latest_notice['backup'].success == false">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="alert">×</button>
+                                                        <strong>{{ 'FAILURE' | translate }}! </strong>
+                                                        {{ 'RESTORE_POINT_FAILED' | translate }} <span
+                                                            am-time-ago="servers[current].latest_notice['backup'].time_resolved"></span>.
+                                                    </div>
+                                                    <!--/ Alert Error -->
+                                                    <p><button type="button" class="btn btn-small btn-primary"
+                                                            ng-click="server_command('backup')"><span
+                                                                class="icone-plus"></span>
+                                                            {{ 'CREATE_NEW_RESTORE_POINT' | translate }}</button></p>
                                                 </div>
                                             </section>
                                         </div>
@@ -1052,27 +1228,51 @@
                                         <!-- START Widget Header Badge -->
                                         <div class="span6 widget">
                                             <header>
-                                                <h4 class="title"><span class="icon icone-hdd"></span> {{ 'ARCHIVES' | translate }}</h4>
-                                                <span class="badge badge-success pull-right" ng-click="change_page('archives')">{{ servers[current].page_data.glance.archives.length }}</span>
+                                                <h4 class="title"><span class="icon icone-hdd"></span>
+                                                    {{ 'ARCHIVES' | translate }}</h4>
+                                                <span class="badge badge-success pull-right"
+                                                    ng-click="change_page('archives')">{{ servers[current].page_data.glance.archives.length }}</span>
                                             </header>
                                             <section class="body">
                                                 <div class="body-inner">
-                                                    <p>{{ 'MOST_RECENT_ARCHIVE' | translate }}: <a title="{{ servers[current].page_data.glance.archives[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}" rel="tooltip" am-time-ago="servers[current].page_data.glance.archives.slice(-1)[0].time"></a></p>
-                                                    <p>{{ 'OLDEST_ARCHIVE' | translate }}: <a title="{{ servers[current].page_data.glance.archives.slice(-1)[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}" rel="tooltip" am-time-ago="servers[current].page_data.glance.archives[0].time"></a></p>
-                                                    <p>{{ 'SPACE_USED_ARCHIVES' | translate }}: {{ servers[current].page_data.glance.du_awd | bytes_to_mb }}</p>
+                                                    <p>{{ 'MOST_RECENT_ARCHIVE' | translate }}: <a
+                                                            title="{{ servers[current].page_data.glance.archives[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}"
+                                                            rel="tooltip"
+                                                            am-time-ago="servers[current].page_data.glance.archives.slice(-1)[0].time"></a>
+                                                    </p>
+                                                    <p>{{ 'OLDEST_ARCHIVE' | translate }}: <a
+                                                            title="{{ servers[current].page_data.glance.archives.slice(-1)[0].time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}"
+                                                            rel="tooltip"
+                                                            am-time-ago="servers[current].page_data.glance.archives[0].time"></a>
+                                                    </p>
+                                                    <p>{{ 'SPACE_USED_ARCHIVES' | translate }}:
+                                                        {{ servers[current].page_data.glance.du_awd | bytes_to_mb }}</p>
                                                     <!-- Alert Error -->
-                                                    <div class="alert alert-success" ng-show="servers[current].latest_notice['archive'].success">
-                                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                                        <strong>{{ 'SUCCESS' | translate }}! </strong> {{ 'ARCHIVE_CREATED' | translate }} <span am-time-ago="servers[current].latest_notice['archive'].time_resolved"></span>.
-                                                    </div><!--/ Alert Error -->
+                                                    <div class="alert alert-success"
+                                                        ng-show="servers[current].latest_notice['archive'].success">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="alert">×</button>
+                                                        <strong>{{ 'SUCCESS' | translate }}! </strong>
+                                                        {{ 'ARCHIVE_CREATED' | translate }} <span
+                                                            am-time-ago="servers[current].latest_notice['archive'].time_resolved"></span>.
+                                                    </div>
+                                                    <!--/ Alert Error -->
                                                     <!-- Alert Error -->
-                                                    <div class="alert alert-error" ng-show="servers[current].latest_notice['archive'].success == false">
-                                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                                        <strong>{{ 'FAILURE' | translate }}! </strong> {{ 'ARCHIVE_FAILED' | translate }} <span am-time-ago="servers[current].latest_notice['archive'].time_resolved"></span>.
-                                                    </div><!--/ Alert Error -->
-                                                    <p><button type="button" class="btn btn-small btn-primary" ng-click="server_command('archive')"><span class="icone-plus"></span> {{ 'CREATE_NEW_ARCHIVE' | translate }}</button></p>
+                                                    <div class="alert alert-error"
+                                                        ng-show="servers[current].latest_notice['archive'].success == false">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="alert">×</button>
+                                                        <strong>{{ 'FAILURE' | translate }}! </strong>
+                                                        {{ 'ARCHIVE_FAILED' | translate }} <span
+                                                            am-time-ago="servers[current].latest_notice['archive'].time_resolved"></span>.
+                                                    </div>
+                                                    <!--/ Alert Error -->
+                                                    <p><button type="button" class="btn btn-small btn-primary"
+                                                            ng-click="server_command('archive')"><span
+                                                                class="icone-plus"></span>
+                                                            {{ 'CREATE_NEW_ARCHIVE' | translate }}</button></p>
                                                 </div>
-                                                
+
                                             </section>
                                         </div>
                                         <!--/ END Widget Header Badge -->
@@ -1090,35 +1290,38 @@
                                         <!-- START Widget Header Badge -->
                                         <div class="span6 widget">
                                             <header>
-                                                <h4 class="title"><span class="icon icone-bookmark"></span> {{ 'OWNERSHIP_AND_DISK_USAGE' | translate }}</h4>
+                                                <h4 class="title"><span class="icon icone-bookmark"></span>
+                                                    {{ 'OWNERSHIP_AND_DISK_USAGE' | translate }}</h4>
                                             </header>
                                             <section class="body">
                                                 <div class="body-inner">
                                                     <!-- Select -->
-                                                        <div class="control-group">
-                                                            <div class="controls">
-                                                                {{ 'SERVER_OWNER' | translate }}: {{ '{0} ({1})'.format(
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            {{ 'SERVER_OWNER' | translate }}: {{ '{0} ({1})'.format(
                                                                     servers[current].page_data.glance.owner.username, 
                                                                     servers[current].page_data.glance.owner.uid) }}
-                                                                </select>
-                                                            </div>
+                                                            </select>
                                                         </div>
+                                                    </div>
                                                     <!--/ Select -->
                                                     <!-- Select -->
-                                                        <div class="control-group">
-                                                            <div class="controls">
-                                                                {{ 'GROUP_OWNER' | translate }}: <select class="span4" 
-                                                                                                ng-model="servers[current].page_data.glance.owner.gid" 
-                                                                                                ng-change="change_owner()">
-                                                                    <option 
-                                                                        ng-repeat="group in groups" 
-                                                                        value="{{ group.gid }}"
-                                                                        ng-selected="group.gid == servers[current].page_data.glance.owner.gid">{{ '{0} ({1})'.format(group.groupname, group.gid) }}</option>
-                                                                </select>
-                                                            </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            {{ 'GROUP_OWNER' | translate }}: <select class="span4"
+                                                                ng-model="servers[current].page_data.glance.owner.gid"
+                                                                ng-change="change_owner()">
+                                                                <option ng-repeat="group in groups"
+                                                                    value="{{ group.gid }}"
+                                                                    ng-selected="group.gid == servers[current].page_data.glance.owner.gid">
+                                                                    {{ '{0} ({1})'.format(group.groupname, group.gid) }}
+                                                                </option>
+                                                            </select>
                                                         </div>
+                                                    </div>
                                                     <!--/ Select -->
-                                                    <p>{{ 'SPACE_USED_LIVE' | translate }}: {{ servers[current].page_data.glance.du_cwd | bytes_to_mb }}</p>
+                                                    <p>{{ 'SPACE_USED_LIVE' | translate }}:
+                                                        {{ servers[current].page_data.glance.du_cwd | bytes_to_mb }}</p>
                                                 </div>
                                             </section>
                                         </div>
@@ -1127,7 +1330,8 @@
                                         <!-- START Widget Header Badge -->
                                         <div class="span6 widget">
                                             <header>
-                                                <h4 class="title"><span class="icon icone-trash"></span> {{ 'DELETE_SERVER' | translate }}</h4>
+                                                <h4 class="title"><span class="icon icone-trash"></span>
+                                                    {{ 'DELETE_SERVER' | translate }}</h4>
                                             </header>
                                             <section class="body">
                                                 <div class="body-inner">
@@ -1135,20 +1339,31 @@
                                                     <div class="control-group">
                                                         <div class="controls">
                                                             <label class="checkbox">
-                                                                <input type="checkbox" ng-model="delete_archive"> {{ 'DELETE_ARCHIVES' | translate }} {{ '{0}/{1}/{2}'.format(servers[current].page_data.glance.base_dir, 'archive', current) }}
+                                                                <input type="checkbox" ng-model="delete_archive">
+                                                                {{ 'DELETE_ARCHIVES' | translate }}
+                                                                {{ '{0}/{1}/{2}'.format(servers[current].page_data.glance.base_dir, 'archive', current) }}
                                                             </label>
                                                             <label class="checkbox">
-                                                                <input type="checkbox" ng-model="delete_backup"> {{ 'DELETE_RESTORE_POINTS' | translate }} {{ '{0}/{1}/{2}'.format(servers[current].page_data.glance.base_dir, 'backup', current) }}
+                                                                <input type="checkbox" ng-model="delete_backup">
+                                                                {{ 'DELETE_RESTORE_POINTS' | translate }}
+                                                                {{ '{0}/{1}/{2}'.format(servers[current].page_data.glance.base_dir, 'backup', current) }}
                                                             </label>
                                                             <label class="checkbox">
-                                                                <input type="checkbox" ng-model="delete_servers"> {{ 'DELETE_LIVE_FILES' | translate }} {{ '{0}/{1}/{2}'.format(servers[current].page_data.glance.base_dir, 'servers', current) }}
+                                                                <input type="checkbox" ng-model="delete_servers">
+                                                                {{ 'DELETE_LIVE_FILES' | translate }}
+                                                                {{ '{0}/{1}/{2}'.format(servers[current].page_data.glance.base_dir, 'servers', current) }}
                                                             </label>
                                                         </div>
-                                                        <button type="button" class="btn btn-mini btn-danger" ng-disabled="!(delete_servers && delete_backup && delete_archive && !servers[current].heartbeat.up)" ng-click="server_command('delete')"><span class="icone-warning-sign"></span> {{ 'DELETE' | translate }}</button>
-                                                    </div><!--/ Default Checkbox Inline -->
+                                                        <button type="button" class="btn btn-mini btn-danger"
+                                                            ng-disabled="!(delete_servers && delete_backup && delete_archive && !servers[current].heartbeat.up)"
+                                                            ng-click="server_command('delete')"><span
+                                                                class="icone-warning-sign"></span>
+                                                            {{ 'DELETE' | translate }}</button>
+                                                    </div>
+                                                    <!--/ Default Checkbox Inline -->
 
                                                 </div>
-                                                
+
                                             </section>
                                         </div>
                                         <!--/ END Widget Header Badge -->
@@ -1178,9 +1393,12 @@
                                 <!-- START Toolbar -->
                                 <ul class="toolbar pull-right">
                                     <li>
-                                        <a href="#" class="link" data-toggle="dropdown"><span class="icon icone-ellipsis-vertical"></span></a>
+                                        <a href="#" class="link" data-toggle="dropdown"><span
+                                                class="icon icone-ellipsis-vertical"></span></a>
                                         <ul class="dropdown-menu pull-right">
-                                            <li><a href="#" ng-click="server_command('backup')"><span class="icon icone-hdd"></span> {{ 'CREATE_NEW_RESTORE_POINT' | translate }}</a></li>
+                                            <li><a href="#" ng-click="server_command('backup')"><span
+                                                        class="icon icone-hdd"></span>
+                                                    {{ 'CREATE_NEW_RESTORE_POINT' | translate }}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -1206,8 +1424,12 @@
                                                 <td>{{ incr.cum }}</td>
                                                 <td>
                                                     <p>
-                                                        <button type="button" class="btn btn-mini btn-success" ng-click="server_command('restore', {step: incr.step})" translate="RESTORE"></button>
-                                                        <button type="button" class="btn btn-mini btn-danger" ng-click="server_command('prune', {step: incr.step})" translate="PRUNE"></button>
+                                                        <button type="button" class="btn btn-mini btn-success"
+                                                            ng-click="server_command('restore', {step: incr.step})"
+                                                            translate="RESTORE"></button>
+                                                        <button type="button" class="btn btn-mini btn-danger"
+                                                            ng-click="server_command('prune', {step: incr.step})"
+                                                            translate="PRUNE"></button>
                                                     </p>
                                                 </td>
                                             </tr>
@@ -1235,9 +1457,12 @@
                                 <!-- START Toolbar -->
                                 <ul class="toolbar pull-right">
                                     <li>
-                                        <a href="#" class="link" data-toggle="dropdown"><span class="icon icone-ellipsis-vertical"></span></a>
+                                        <a href="#" class="link" data-toggle="dropdown"><span
+                                                class="icon icone-ellipsis-vertical"></span></a>
                                         <ul class="dropdown-menu pull-right">
-                                            <li><a href="#" ng-click="server_command('archive')"><span class="icon icone-hdd"></span> {{ 'CREATE_NEW_ARCHIVE' | translate }}</a></li>
+                                            <li><a href="#" ng-click="server_command('archive')"><span
+                                                        class="icon icone-hdd"></span>
+                                                    {{ 'CREATE_NEW_ARCHIVE' | translate }}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -1255,20 +1480,26 @@
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="archive in servers[current].page_data.glance.archives">
-                                                <td>{{ archive.time | amDateFormat: "dddd, MMMM Do YYYY, h:mm:ss a"  }}</td>
+                                                <td>{{ archive.time | amDateFormat: "dddd, MMMM Do YYYY, h:mm:ss a"  }}
+                                                </td>
                                                 <td>{{ archive.size | bytes_to_mb }}</td>
                                                 <td>{{ archive.filename }}</td>
                                                 <td>
                                                     <p>
                                                         <!-- Button Dropdown -->
                                                         <div class="btn-group">
-                                                            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">{{ 'ACTIONS' | translate }} <span class="caret"></span></button>
+                                                            <button class="btn btn-small dropdown-toggle"
+                                                                data-toggle="dropdown">{{ 'ACTIONS' | translate }} <span
+                                                                    class="caret"></span></button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a ng-click="server_command('delete_archive', {filename: archive.filename})" translate="DELETE_THIS_ARCHIVE"></a></li>
+                                                                <li><a ng-click="server_command('delete_archive', {filename: archive.filename})"
+                                                                        translate="DELETE_THIS_ARCHIVE"></a></li>
                                                                 <li><a href="#"></a></li>
-                                                                <li><a ng-click="server_from_archive(archive.filename, current)" translate="CREATE_FROM_ARCHIVE"></a></li>
+                                                                <li><a ng-click="server_from_archive(archive.filename, current)"
+                                                                        translate="CREATE_FROM_ARCHIVE"></a></li>
                                                             </ul>
-                                                        </div><!--/ Button Dropdown -->
+                                                        </div>
+                                                        <!--/ Button Dropdown -->
                                                         <!-- Button Dropdown -->
                                                     </p>
                                                 </td>
@@ -1299,7 +1530,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="span4">{{ "CRON_EXPRESSION" | translate }} (<a href="https://www.npmjs.com/package/cron">?</a>)</th>
+                                                <th class="span4">{{ "CRON_EXPRESSION" | translate }} (<a
+                                                        href="https://www.npmjs.com/package/cron">?</a>)</th>
                                                 <th translate="COMMAND_TO_RUN" class="span4"></th>
                                                 <th translate="ADDITIONAL_ARGUMENT"></th>
                                                 <th translate="ACTIONS"></th>
@@ -1312,9 +1544,11 @@
                                                         <!-- Input Text -->
                                                         <div class="control-group">
                                                             <div class="controls">
-                                                                <input type="text" name="input-text" class="span12" ng-value="" ng-model="cron.source">
+                                                                <input type="text" name="input-text" class="span12"
+                                                                    ng-value="" ng-model="cron.source">
                                                             </div>
-                                                        </div><!--/ Input Text -->
+                                                        </div>
+                                                        <!--/ Input Text -->
                                                     </p>
                                                 </td>
                                                 <td>
@@ -1325,14 +1559,22 @@
                                                                 <select class="span12" ng-model="cron.action">
                                                                     <option translate="START" value="start"></option>
                                                                     <option translate="STOP" value="stop"></option>
-                                                                    <option translate="RESTART" value="restart"></option>
-                                                                    <option translate="CREATE_NEW_RESTORE_POINT" value="backup"></option>
-                                                                    <option translate="CREATE_NEW_ARCHIVE" value="archive"></option>
-                                                                    <option ng-show="current && servers[current].live_logs['logs/latest.log'].length" translate="COMMIT_THEN_CREATE_ARCHIVE" value="archive_with_commit"></option>
-                                                                    <option translate="SEND_TO_CONSOLE" value="stuff"></option>
+                                                                    <option translate="RESTART" value="restart">
+                                                                    </option>
+                                                                    <option translate="CREATE_NEW_RESTORE_POINT"
+                                                                        value="backup"></option>
+                                                                    <option translate="CREATE_NEW_ARCHIVE"
+                                                                        value="archive"></option>
+                                                                    <option
+                                                                        ng-show="current && servers[current].live_logs['logs/latest.log'].length"
+                                                                        translate="COMMIT_THEN_CREATE_ARCHIVE"
+                                                                        value="archive_with_commit"></option>
+                                                                    <option translate="SEND_TO_CONSOLE" value="stuff">
+                                                                    </option>
                                                                 </select>
                                                             </div>
-                                                        </div><!--/ Select -->
+                                                        </div>
+                                                        <!--/ Select -->
                                                     </p>
                                                 </td>
                                                 <td>
@@ -1340,14 +1582,19 @@
                                                         <!-- Input Text -->
                                                         <div class="control-group">
                                                             <div class="controls">
-                                                                <input type="text" name="input-text" class="span12" ng-model="cron.msg" ng-show="cron.action == 'stuff'" />
+                                                                <input type="text" name="input-text" class="span12"
+                                                                    ng-model="cron.msg"
+                                                                    ng-show="cron.action == 'stuff'" />
                                                             </div>
-                                                        </div><!--/ Input Text -->
+                                                        </div>
+                                                        <!--/ Input Text -->
                                                     </p>
                                                 </td>
                                                 <td>
                                                     <p>
-                                                        <button type="button" class="btn btn-primary" ng-click="cron_command('create', {command: cron.action, source: cron.source, msg: cron.msg})" translate="SUBMIT_CRONJOB"></button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            ng-click="cron_command('create', {command: cron.action, source: cron.source, msg: cron.msg})"
+                                                            translate="SUBMIT_CRONJOB"></button>
                                                     </p>
                                                 </td>
                                             </tr>
@@ -1357,9 +1604,18 @@
                                                 <td>{{ definition.msg }}</td>
                                                 <td>
                                                     <p>
-                                                        <button type="button" class="btn btn-success" ng-click="cron_command('start', {hash: hash})" translate="START" ng-disabled="definition.enabled != false"></button>
-                                                        <button type="button" class="btn btn-warning" ng-click="cron_command('suspend', {hash: hash})" translate="SUSPEND" ng-disabled="definition.enabled == false"></button>
-                                                        <button type="button" class="btn btn-danger" ng-click="cron_command('delete', {hash: hash})" translate="DELETE" ng-disabled="definition.enabled != false"></button>
+                                                        <button type="button" class="btn btn-success"
+                                                            ng-click="cron_command('start', {hash: hash})"
+                                                            translate="START"
+                                                            ng-disabled="definition.enabled != false"></button>
+                                                        <button type="button" class="btn btn-warning"
+                                                            ng-click="cron_command('suspend', {hash: hash})"
+                                                            translate="SUSPEND"
+                                                            ng-disabled="definition.enabled == false"></button>
+                                                        <button type="button" class="btn btn-danger"
+                                                            ng-click="cron_command('delete', {hash: hash})"
+                                                            translate="DELETE"
+                                                            ng-disabled="definition.enabled != false"></button>
                                                     </p>
                                                 </td>
                                             </tr>
@@ -1400,23 +1656,24 @@
                                 <h4 class="title"><span class="icon icone-edit"></span> server.properties</h4>
                                 <!-- START Toolbar -->
                                 <ul class="toolbar pull-right">
-                                    <li><a href="#" class="link" ng-click="modals.open_add_sp()"><span class="icon icone-plus"></span></a></li>
+                                    <li><a href="#" class="link" ng-click="modals.open_add_sp()"><span
+                                                class="icon icone-plus"></span></a></li>
                                 </ul>
                                 <!--/ END Toolbar -->
                             </header>
                             <section class="body">
                                 <div class="body-inner">
                                     <!-- Read Only -->
-                                    <div class="control-group" ng-repeat="(property, new_value) in servers[current].sp track by $index">
+                                    <div class="control-group"
+                                        ng-repeat="(property, new_value) in servers[current].sp track by $index">
                                         <div class="controls">
                                             <input type="text" class="input-large" ng-value="property" readonly>
-                                            <input type="text" class="input-xlarge" 
-                                                ng-value="new_value" 
-                                                ng-change="change_sp()" 
-                                                ng-model="new_value"
+                                            <input type="text" class="input-xlarge" ng-value="new_value"
+                                                ng-change="change_sp()" ng-model="new_value"
                                                 ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
                                         </div>
-                                    </div><!--/ Read Only -->
+                                    </div>
+                                    <!--/ Read Only -->
                                 </div>
                             </section>
                         </div>
@@ -1439,7 +1696,8 @@
                             </header>
                             <section class="body">
                                 <div class="body-inner">
-                                    <textarea class="span10 monospace" rows="20" ng-model="servers[current].cy" readonly></textarea>
+                                    <textarea class="span10 monospace" rows="20" ng-model="servers[current].cy"
+                                        readonly></textarea>
                                 </div>
                             </section>
                         </div>
@@ -1486,7 +1744,8 @@
                             <div class="body-inner">
                                 <div class="control-group">
                                     <div class="controls console-input" ng-repeat="obj in user_input">
-                                        <label>&gt;</label><input type="text" class="span12" ng-model="obj.text" ng-enter="console_input()">
+                                        <label>&gt;</label><input type="text" class="span12" ng-model="obj.text"
+                                            ng-enter="console_input()">
                                     </div>
                                 </div>
                             </div>
@@ -1505,13 +1764,15 @@
                         <!-- START Default Widget -->
                         <div class="span12 widget">
                             <header>
-                                <h4 class="title"><span class="icon icone-user"></span> <span translate="PLAYER_INTERACTION"></span></h4>
+                                <h4 class="title"><span class="icon icone-user"></span> <span
+                                        translate="PLAYER_INTERACTION"></span></h4>
                             </header>
                             <section class="body">
                                 <div class="body-inner">
 
                                     <!-- Help Text -->
-                                    <div class="control-group" ng-repeat="player in servers[current].heartbeat.query.player_ track by $index">
+                                    <div class="control-group"
+                                        ng-repeat="player in servers[current].heartbeat.query.player_ track by $index">
                                         <div class="controls">
                                             <input type="text" class="input-medium" ng-value="player" readonly />
                                             <select class="input-medium" ng-model="interaction.command">
@@ -1528,17 +1789,28 @@
                                             </select>
                                             <div class="input-prepend input-append" ng-show="interaction.command">
                                                 <span class="add-on">{{ interaction.command + ' ' + player }}</span>
-                                                <input type="text" name="input-text" class="" ng-model="interaction.args" />
+                                                <input type="text" name="input-text" class=""
+                                                    ng-model="interaction.args" />
                                             </div>
-                                            <button class="btn btn-success control_centering" ng-click="player_command(interaction.command, player, interaction.args)" ng-show="interaction.command"><span class="icone-share-alt"></span> </button> 
+                                            <button class="btn btn-success control_centering"
+                                                ng-click="player_command(interaction.command, player, interaction.args)"
+                                                ng-show="interaction.command"><span class="icone-share-alt"></span>
+                                            </button>
                                         </div>
-                                        
-                                        <button class="btn btn-small" ng-click="player_command('op', player, '')"><span class="icon-arrow-up"></span> op</button>
-                                        <button class="btn btn-small" ng-click="player_command('deop', player, '')"><span class="icon-arrow-down"></span> de-op</button>
-                                        <button class="btn btn-small btn-warning" ng-click="player_command('kill', player, '')">Kill</button>
-                                        <button class="btn btn-small btn-danger" ng-click="player_command('kick', player, '')">Kick</button>
-                                        <button class="btn btn-small btn-danger" ng-click="player_command('ban', player, '')">Ban</button>
-                                    </div><!--/ Help Text -->
+
+                                        <button class="btn btn-small" ng-click="player_command('op', player, '')"><span
+                                                class="icon-arrow-up"></span> op</button>
+                                        <button class="btn btn-small"
+                                            ng-click="player_command('deop', player, '')"><span
+                                                class="icon-arrow-down"></span> de-op</button>
+                                        <button class="btn btn-small btn-warning"
+                                            ng-click="player_command('kill', player, '')">Kill</button>
+                                        <button class="btn btn-small btn-danger"
+                                            ng-click="player_command('kick', player, '')">Kick</button>
+                                        <button class="btn btn-small btn-danger"
+                                            ng-click="player_command('ban', player, '')">Ban</button>
+                                    </div>
+                                    <!--/ Help Text -->
 
                                 </div>
                             </section>
@@ -1557,163 +1829,191 @@
                 </div>
                 <!--/ END Content -->
 
-            <!-- Modal With Animation -->
-            <div id="modal_locales" class="modal hide fade">
-                <div class="modal-header">
-                    <h4 translate="CHANGE_LOCALE"></h4>
-                </div>
-                <div class="modal-body">
-                  <!-- Select -->
-                  <div class="control-group">
-                      <div class="controls">
-                          <select class="span2" ng-model="preferred_locale" ng-options="locale as locale for locale in locale_list">
-                          </select>
-                      </div>
-                  </div>
-                  <!--/ Select -->
-                </div>
-            </div><!--/ Modal With Animation -->
-
-            <!-- Modal With Animation -->
-            <div id="modal_sp" class="modal hide fade">
-                <div class="modal-header">
-                    <h4 translate="ADD_SP_ATTRIBUTE"></h4>
-                </div>
-                <div class="modal-body">
-                    <p translate="SP_DESCRIPTION"></p>
-                    <input type="text" class="" ng-model="sp.new_attribute" placeholder="announce-player-achievements"> = <input type="text" class="" ng-model="sp.new_value" placeholder="true">
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-dismiss="modal" translate="SP_ADD" ng-disabled="!sp.new_attribute" ng-click="modals.close_add_sp()"></button>
-                </div>
-            </div><!--/ Modal With Animation --> 
-
-            <!-- Modal With Animation -->
-            <div id="modal_eula" class="modal hide fade">
-                <div class="modal-header">
-                    <h4 translate="EULA_DETECTED"></h4>
-                </div>
-                <div class="modal-body">
-                    <p translate="EULA_MUST_BE_ACCEPTED"></p>
-                    <p><a href="https://account.mojang.com/documents/minecraft_eula" translate="READ_THE_EULA"></a></p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" aria-hidden="true" translate="ACCEPT_EULA" ng-click="server_command('accept_eula')" ng-class="{'btn-default': servers[current].page_data.glance.eula != false, 'btn-primary': servers[current].page_data.glance.eula == false}"></button>
-                    <button class="btn btn-warning" data-dismiss="modal" translate="KILL" ng-click="server_command('kill')" ng-show="servers[current].heartbeat.up"></button>
-                    <button class="btn btn-warning" data-dismiss="modal" translate="RESTART" ng-click="modals.close_accept_eula_restart()" ng-show="servers[current].heartbeat.up"></button>
-                    <button class="btn btn-warning" data-dismiss="modal" translate="START" ng-click="modals.close_accept_eula_start()" ng-show="!servers[current].heartbeat.up"></button>
-                </div>
-            </div><!--/ Modal With Animation --> 
-
-            <!-- Modal With Animation -->
-            <div id="modal_new_server" class="modal hide fade">
-                <div class="modal-header">
-                    <h4 translate="STARTING_A_NEW_SERVER"></h4>
-                </div>
-                <div class="modal-body">
-                    <p translate="NEW_SERVER_OVERVIEW"></p>
-                    <div class="controls">
-                        <select class="" ng-model="myprofile" default-option="Select a profile" data-ng-options="p as p.id group by p.group for p in profiles | profile_downloaded: 'only_downloaded' | orderBy:'-releaseTime'" ng-change="change_sc('minecraft', 'profile', myprofile.id)">
-                            <option value="" disabled selected translate="CHANGE_PROFILE_TO"></option>
-                        </select>
+                <!-- Modal With Animation -->
+                <div id="modal_locales" class="modal hide fade">
+                    <div class="modal-header">
+                        <h4 translate="CHANGE_LOCALE"></h4>
+                    </div>
+                    <div class="modal-body">
                         <!-- Select -->
                         <div class="control-group">
                             <div class="controls">
-                                <select class="" ng-model="myjarfile" data-ng-options="j for j in servers[current].page_data.glance.server_files" ng-change="change_sc('java', 'jarfile', myjarfile)">
-                                    <option value="" disabled selected translate="CHANGE_JARFILE_TO"></option>
-                                </select>
-                            </div>
-                        </div><!--/ Select -->
-                    </div>
-                    <div class="controls">
-                        <label class="control-label" translate="MEMORY_ALLOCATION"></label>
-                        <!-- Help Text -->
-                        <div class="control-group">
-                            <div class="controls">
-                                <div class="input-prepend input-append">
-                                    <span class="add-on" translate="JAVA_XMX"></span>
-                                    <input type="text" 
-                                        ng-model="servers[current].sc.java.java_xmx" 
-                                        ng-change="change_sc('java', 'java_xmx', servers[current].sc.java.java_xmx)" 
-                                        ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
-                                    <span class="add-on" translate="MB_ABBREVIATION"></span>
-                                </div>
-                            </div>
-                            <div class="controls">
-                                <div class="input-prepend input-append">
-                                    <span class="add-on" translate="JAVA_XMS"></span>
-                                    <input type="text" 
-                                        ng-model="servers[current].sc.java.java_xms" 
-                                        ng-change="change_sc('java', 'java_xms', servers[current].sc.java.java_xms)"
-                                        ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
-                                    <span class="add-on" translate="MB_ABBREVIATION"></span>
-                                </div>
-                            </div>
-                        </div><!--/ Help Text -->
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" ng-click="modals.close_new_server_start()" translate="START"></button>
-                </div>
-            </div><!--/ Modal With Animation --> 
-
-            <!-- Modal With Animation -->
-            <div id="modal_server_from_archive" class="modal hide fade">
-                <div class="modal-header">
-                    <h4 translate="CREATE_SERVER_FROM_ARCHIVE"></h4>
-                </div>
-                <div class="modal-body">
-                    <p translate="SERVER_FROM_ARCHIVE_DESC"></p>
-                    <input type="text" class="span2" ng-model="new_server_name">
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-success" aria-hidden="true" translate="CREATE_FROM_ARCHIVE" ng-click="server_from_archive_create()"></button>
-                </div>
-            </div><!--/ Modal With Animation --> 
-
-            <!-- Modal With Animation -->
-            <div id="modal_spigotjar" class="modal hide fade">
-                <div class="modal-header">
-                    <h4 translate="SPIGOT_CRAFTBUKKIT"></h4>
-                </div>
-                <div class="modal-body">
-                    <p translate="JAR_COPY_DESC"></p>
-                    <!-- Select -->
-                        <div class="control-group">
-                            <div class="controls">
-                                <select class="span2" ng-model="server_target" ng-options="name as name for (name, instance) in servers | membership">
+                                <select class="span2" ng-model="preferred_locale"
+                                    ng-options="locale as locale for locale in locale_list">
                                 </select>
                             </div>
                         </div>
-                    <!--/ Select -->
+                        <!--/ Select -->
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" ng-click="modals.close_copy_to_server(server_target, jar.id)" translate="COPY_TO_SERVER"></button>
-                </div>
-            </div><!--/ Modal With Animation --> 
+                <!--/ Modal With Animation -->
 
-            <!-- Modal With Animation -->
-            <div id="modal_niceness" class="modal hide fade">
-                <div class="modal-header">
-                    <h4 translate="CHANGE_NICENESS"></h4>
+                <!-- Modal With Animation -->
+                <div id="modal_sp" class="modal hide fade">
+                    <div class="modal-header">
+                        <h4 translate="ADD_SP_ATTRIBUTE"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="SP_DESCRIPTION"></p>
+                        <input type="text" class="" ng-model="sp.new_attribute"
+                            placeholder="announce-player-achievements"> = <input type="text" class=""
+                            ng-model="sp.new_value" placeholder="true">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal" translate="SP_ADD"
+                            ng-disabled="!sp.new_attribute" ng-click="modals.close_add_sp()"></button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p translate="NICENESS_DESC"></p>
-                    <!-- Select -->
+                <!--/ Modal With Animation -->
+
+                <!-- Modal With Animation -->
+                <div id="modal_eula" class="modal hide fade">
+                    <div class="modal-header">
+                        <h4 translate="EULA_DETECTED"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="EULA_MUST_BE_ACCEPTED"></p>
+                        <p><a href="https://account.mojang.com/documents/minecraft_eula" translate="READ_THE_EULA"></a>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" aria-hidden="true" translate="ACCEPT_EULA"
+                            ng-click="server_command('accept_eula')"
+                            ng-class="{'btn-default': servers[current].page_data.glance.eula != false, 'btn-primary': servers[current].page_data.glance.eula == false}"></button>
+                        <button class="btn btn-warning" data-dismiss="modal" translate="KILL"
+                            ng-click="server_command('kill')" ng-show="servers[current].heartbeat.up"></button>
+                        <button class="btn btn-warning" data-dismiss="modal" translate="RESTART"
+                            ng-click="modals.close_accept_eula_restart()"
+                            ng-show="servers[current].heartbeat.up"></button>
+                        <button class="btn btn-warning" data-dismiss="modal" translate="START"
+                            ng-click="modals.close_accept_eula_start()"
+                            ng-show="!servers[current].heartbeat.up"></button>
+                    </div>
+                </div>
+                <!--/ Modal With Animation -->
+
+                <!-- Modal With Animation -->
+                <div id="modal_new_server" class="modal hide fade">
+                    <div class="modal-header">
+                        <h4 translate="STARTING_A_NEW_SERVER"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="NEW_SERVER_OVERVIEW"></p>
+                        <div class="controls">
+                            <select class="" ng-model="myprofile" default-option="Select a profile"
+                                data-ng-options="p as p.id group by p.group for p in profiles | profile_downloaded: 'only_downloaded' | orderBy:'-releaseTime'"
+                                ng-change="change_sc('minecraft', 'profile', myprofile.id)">
+                                <option value="" disabled selected translate="CHANGE_PROFILE_TO"></option>
+                            </select>
+                            <!-- Select -->
+                            <div class="control-group">
+                                <div class="controls">
+                                    <select class="" ng-model="myjarfile"
+                                        data-ng-options="j for j in servers[current].page_data.glance.server_files"
+                                        ng-change="change_sc('java', 'jarfile', myjarfile)">
+                                        <option value="" disabled selected translate="CHANGE_JARFILE_TO"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--/ Select -->
+                        </div>
+                        <div class="controls">
+                            <label class="control-label" translate="MEMORY_ALLOCATION"></label>
+                            <!-- Help Text -->
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="input-prepend input-append">
+                                        <span class="add-on" translate="JAVA_XMX"></span>
+                                        <input type="text" ng-model="servers[current].sc.java.java_xmx"
+                                            ng-change="change_sc('java', 'java_xmx', servers[current].sc.java.java_xmx)"
+                                            ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
+                                        <span class="add-on" translate="MB_ABBREVIATION"></span>
+                                    </div>
+                                </div>
+                                <div class="controls">
+                                    <div class="input-prepend input-append">
+                                        <span class="add-on" translate="JAVA_XMS"></span>
+                                        <input type="text" ng-model="servers[current].sc.java.java_xms"
+                                            ng-change="change_sc('java', 'java_xms', servers[current].sc.java.java_xms)"
+                                            ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
+                                        <span class="add-on" translate="MB_ABBREVIATION"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ Help Text -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="modals.close_new_server_start()"
+                            translate="START"></button>
+                    </div>
+                </div>
+                <!--/ Modal With Animation -->
+
+                <!-- Modal With Animation -->
+                <div id="modal_server_from_archive" class="modal hide fade">
+                    <div class="modal-header">
+                        <h4 translate="CREATE_SERVER_FROM_ARCHIVE"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="SERVER_FROM_ARCHIVE_DESC"></p>
+                        <input type="text" class="span2" ng-model="new_server_name">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" aria-hidden="true" translate="CREATE_FROM_ARCHIVE"
+                            ng-click="server_from_archive_create()"></button>
+                    </div>
+                </div>
+                <!--/ Modal With Animation -->
+
+                <!-- Modal With Animation -->
+                <div id="modal_spigotjar" class="modal hide fade">
+                    <div class="modal-header">
+                        <h4 translate="SPIGOT_CRAFTBUKKIT"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="JAR_COPY_DESC"></p>
+                        <!-- Select -->
                         <div class="control-group">
                             <div class="controls">
-                                <input type="text"
-                                    ng-model="servers[current].niceness"
+                                <select class="span2" ng-model="server_target"
+                                    ng-options="name as name for (name, instance) in servers | membership">
+                                </select>
+                            </div>
+                        </div>
+                        <!--/ Select -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success"
+                            ng-click="modals.close_copy_to_server(server_target, jar.id)"
+                            translate="COPY_TO_SERVER"></button>
+                    </div>
+                </div>
+                <!--/ Modal With Animation -->
+
+                <!-- Modal With Animation -->
+                <div id="modal_niceness" class="modal hide fade">
+                    <div class="modal-header">
+                        <h4 translate="CHANGE_NICENESS"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="NICENESS_DESC"></p>
+                        <!-- Select -->
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" ng-model="servers[current].niceness"
                                     ng-change="server_command('renice', {niceness: servers[current].niceness})"
                                     ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0} }">
                             </div>
                         </div>
-                    <!--/ Select -->
+                        <!--/ Select -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="modals.close_modal_niceness()"
+                            translate="">RENICE</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" ng-click="modals.close_modal_niceness()" translate="">RENICE</button>
-                </div>
-            </div><!--/ Modal With Animation -->
+                <!--/ Modal With Animation -->
 
             </section>
             <!--/ END Template Main Content -->
@@ -1772,7 +2072,8 @@
     <script src="/moment/min/moment.min.js"></script>
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-translate/angular-translate.min.js"></script>
-    <script src="/angular-translate/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script
+        src="/angular-translate/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
     <script src="/angular-moment/angular-moment.min.js"></script>
     <script src="/angular-moment-duration-format/moment-duration-format.js"></script>
     <script src="/angular-sanitize/angular-sanitize.min.js"></script>
@@ -1783,4 +2084,5 @@
     <!--/ Javascript (Application) -->
     <!--/ END JAVASCRIPT SECTION -->
 </body>
+
 </html>

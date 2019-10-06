@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div id="wrapper">
+        
+    </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <!-- IMPORTANT! : All the available plugin will be loaded at once -->
+    <!-- START JAVASCRIPT SECTION - Include at the bottom of the page to reduce load time -->
+    <!-- Javascript(Vendors) -->
+    <script src="assets/jquery/js/jquery-2.1.4.min.js"></script>
+    <script src="assets/jui/js/jquery-ui-1.10.3.min.js"></script>
+    <!--/ Javascript(Vendors) -->
+
+    <!-- Javascript(Plugins) -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="assets/datatable/js/dataTables-bootstrap.min.js"></script>
+    <script src="assets/easypiechart/js/jquery.easypiechart.min.js"></script>
+    <script src="assets/formwizard/js/jquery.formwizard.min.js"></script>
+    <script src="assets/fullcalendar/js/fullcalendar.min.js"></script>
+    <script src="assets/ie-placeholder/js/jquery.placeholder.min.js"></script>
+    <script src="assets/inputmask/js/jquery.inputmask.min.js"></script>
+    <script src="assets/select2/js/select2.min.js"></script>
+    <script src="assets/sparkline/js/jquery.sparkline.min.js"></script>
+    <script src="assets/gritter/js/jquery.gritter.min.js"></script>
+    <script src="assets/resize/js/jquery.ba-resize.min.js"></script>
+
+    <!-- Form Validation -->
+    <script src="assets/formvalidation/bassistance/js/jquery.validate.min.js"></script>
+    <script src="assets/formvalidation/validationengine/js/lang/jquery.validationEngine-en.min.js"></script>
+    <script src="assets/formvalidation/validationengine/js/jquery.validationEngine.min.js"></script>
+
+    <!-- Chart -->
+    <script src="assets/flot/jquery.flot.min.js"></script>
+    <script src="assets/flot/jquery.flot.pie.min.js"></script>
+    <script src="assets/flot/jquery.flot.categories.min.js"></script>
+    <script src="assets/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="assets/flot/jquery.flot.resize.min.js"></script>
+    <script src="assets/flot/excanvas.min.js"></script>
+    <!--/ Javascript(Plugins) -->
+
+    <!-- Javascript (Application) -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/moment/min/moment.min.js"></script>
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-translate/angular-translate.min.js"></script>
+    <script
+        src="/angular-translate/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="/angular-moment/angular-moment.min.js"></script>
+    <script src="/angular-moment-duration-format/moment-duration-format.js"></script>
+    <script src="js/scriptin.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/easypiechart.sample.js"></script>
+    <!--/ Javascript (Application) -->
+    <!--/ END JAVASCRIPT SECTION -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var MASK_PASSWORD = true;
+            try {
+                $('input[name=password]').attr('type', (MASK_PASSWORD ? 'password' : 'text'));
+                $('input[name=hide]').on('change', function () {
+                    if ($(this).is(':checked'))
+                        $('input[name=password]').attr('type', 'password');
+                    else
+                        $('input[name=password]').attr('type', 'text');
+                })
+            } catch (e) {
+                $('input[name=password]').attr('type', 'password');
+            }
+        })
+    </script>
+</body>
+
+</html>
